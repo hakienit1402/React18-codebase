@@ -13,7 +13,8 @@ type MessageHandler = (msg: IMessage) => void;
  */
 export function createWebSocketService(token: string) {
   let connectPromise: Promise<void> | null = null;
-  const wsUrl = (window as any)._env_?.VITE_WS_URL || "ws://localhost:8080/ws";
+  const wsUrl =
+    (window as any)._env_?.VITE_WS_URL ?? (import.meta as any).env?.VITE_WS_URL ?? "";
   const client = new Client({
     brokerURL: wsUrl,
     connectHeaders: {

@@ -88,7 +88,17 @@ src/
 
 ## Runtime Configuration
 
-This app uses runtime-injected configuration via `window._env_` loaded from `/env.js` (see `index.html`). In production, the Docker image injects values from `deploy/env.template.js` using a startup script.
+This app supports 2 cách cấu hình:
+
+1) Local dev qua Vite `.env.*` (build-time) — dùng `.env.local`:
+
+```
+VITE_APP_ENV=local
+VITE_API_URL=http://localhost:3001/api
+VITE_WS_URL=ws://localhost:3001/ws
+```
+
+2) Docker runtime (local Docker) — set biến `-e VITE_*` khi `docker run`. Entrypoint sẽ sinh `/env.js` cho `window._env_`.
 
 Available keys:
 
@@ -96,7 +106,7 @@ Available keys:
 - `VITE_API_URL` (used by the Axios client)
 - `VITE_WS_URL` (used by the STOMP WebSocket client)
 
-For local development, create `public/env.js`:
+For local development, bạn có thể tạo nhanh `public/env.js` (nếu không dùng `.env.local`):
 
 ```js
 window._env_ = {

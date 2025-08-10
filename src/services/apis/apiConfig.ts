@@ -3,10 +3,13 @@ import axios, { AxiosInstance } from "axios";
 import { removeSecureCookie, setSecureCookie } from "@/utils/cookies";
 
 /**
- * Runtime-injected API base URL from `deploy/env.template.js` → `window._env_`.
- * Falls back to empty string if not provided.
+ * API base URL resolution order:
+ * - Runtime via window._env_.VITE_API_URL (Docker/NGINX runtime injection)
+ * - Build-time via import.meta.env.VITE_API_URL (Vite .env for local dev)
+ * - Fallback empty string
  */
-export const VITE_API_URL = window._env_?.VITE_API_URL;
+export const VITE_API_URL =
+  (window as any)._env_?.VITE_API_URL ?? (import.meta as any).env?.VITE_API_URL ?? "";
 
 /**
  * Environment configuration for API client.
