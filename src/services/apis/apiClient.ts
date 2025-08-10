@@ -1,10 +1,6 @@
 import { AxiosError } from "axios";
 
-import {
-  apiInstance,
-  ApiRequestConfig,
-  createCancelToken,
-} from "@/services/apis";
+import { apiInstance, ApiRequestConfig } from "@/services/apis";
 import { logError } from "@/utils/logger";
 
 /**
@@ -43,11 +39,7 @@ export class ApiClient {
   /**
    * Perform a POST request.
    */
-  static async post<T>(
-    url: string,
-    body: unknown,
-    config: ApiRequestConfig = {},
-  ) {
+  static async post<T>(url: string, body: unknown, config: ApiRequestConfig = {}) {
     try {
       return await apiInstance.post<T>(url, body, config);
     } catch (error) {
@@ -58,11 +50,7 @@ export class ApiClient {
   /**
    * Perform a PUT request.
    */
-  static async put<T>(
-    url: string,
-    body?: unknown,
-    config: ApiRequestConfig = {},
-  ) {
+  static async put<T>(url: string, body?: unknown, config: ApiRequestConfig = {}) {
     try {
       return await apiInstance.put<T>(url, body, config);
     } catch (error) {
@@ -73,11 +61,7 @@ export class ApiClient {
   /**
    * Perform a PATCH request.
    */
-  static async patch<T>(
-    url: string,
-    body: unknown,
-    config: ApiRequestConfig = {},
-  ) {
+  static async patch<T>(url: string, body: unknown, config: ApiRequestConfig = {}) {
     try {
       return await apiInstance.patch<T>(url, body, config);
     } catch (error) {
@@ -100,7 +84,7 @@ export class ApiClient {
    * Create a cancel token source for cancelable requests.
    */
   static createCancelableRequest() {
-    return createCancelToken();
+    return new AbortController();
   }
 }
 

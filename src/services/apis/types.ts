@@ -1,7 +1,5 @@
-import { AxiosRequestConfig, Canceler } from "axios";
+import { AxiosRequestConfig } from "axios";
 import { z } from "zod";
-
-export type { Canceler };
 
 /**
  * Logger interface
@@ -14,7 +12,7 @@ export interface Logger {
 }
 
 export type ApiRequestConfig = AxiosRequestConfig & {
-  abort?: (cancel: Canceler) => void;
+  signal?: AbortSignal;
 };
 
 /**

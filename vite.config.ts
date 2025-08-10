@@ -64,11 +64,6 @@ export default defineConfig({
       timeout: 120000,
     },
   },
-  define: {
-    // Define global variables
-    "process.env": {},
-    global: {},
-  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
@@ -86,9 +81,7 @@ export default defineConfig({
       polyfill: true,
       resolveDependencies: (filename, deps) => {
         if (filename.includes("index.html")) {
-          return deps.filter(
-            (dep) => dep.includes("react") || dep.includes("vendor"),
-          );
+          return deps.filter((dep) => dep.includes("react") || dep.includes("vendor"));
         }
         return deps;
       },

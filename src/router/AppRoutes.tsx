@@ -26,6 +26,10 @@ const NoInternetPage = lazy(() => import("@/pages/NoInternetPage"));
 const AppRoutes = () => {
   const routes = [
     {
+      path: "/not-authorized",
+      element: <ErrorPageWrapper errorType="401" />,
+    },
+    {
       path: "*",
       element: <ErrorPageWrapper errorType="404" />,
     },

@@ -1,31 +1,19 @@
 /* eslint-disable no-console */
 import { AxiosError } from "axios";
 
-import {
-  clearAuthToken,
-  createApiInstance,
-  createCancelToken,
-  setAuthTokenToCookie,
-} from "@/services/apis/apiConfig";
+import { clearAuthToken, createApiInstance, setAuthTokenToCookie } from "@/services/apis/apiConfig";
 import { setupInterceptors } from "@/services/apis/interceptors";
-import {
-  APIError,
-  APIErrorDataErrorProps,
-  Logger,
-} from "@/services/apis/types";
+import { APIError, APIErrorDataErrorProps, Logger } from "@/services/apis/types";
 
 export * from "./types";
 
 // Create console logger (replace with your preferred logging solution)
 const logger: Logger = {
-  info: (message: string, meta?: Record<string, unknown>) =>
-    console.info(message, meta),
+  info: (message: string, meta?: Record<string, unknown>) => console.info(message, meta),
   error: (message: string, error?: Error, meta?: Record<string, unknown>) =>
     console.error(message, error, meta),
-  warn: (message: string, meta?: Record<string, unknown>) =>
-    console.warn(message, meta),
-  debug: (message: string, meta?: Record<string, unknown>) =>
-    console.debug(message, meta),
+  warn: (message: string, meta?: Record<string, unknown>) => console.warn(message, meta),
+  debug: (message: string, meta?: Record<string, unknown>) => console.debug(message, meta),
 };
 
 /**
@@ -47,4 +35,4 @@ export const parseErrorFromAPI = (error: AxiosError): APIError => {
 const apiInstance = createApiInstance();
 setupInterceptors(apiInstance, logger);
 
-export { apiInstance, clearAuthToken, createCancelToken, setAuthTokenToCookie };
+export { apiInstance, clearAuthToken, setAuthTokenToCookie };

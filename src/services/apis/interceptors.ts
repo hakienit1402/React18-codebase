@@ -9,7 +9,12 @@ import { ROUTES_PATH } from "@/constants/router";
 import { AUTH_API_ENDPOINT } from "@/domains/auth/constants/authConstants";
 import { parseErrorFromAPI } from "@/services/apis";
 import { ApiClient } from "@/services/apis/apiClient";
-import { clearAuthToken, ENV_API } from "@/services/apis/apiConfig";
+import {
+  clearAuthToken,
+  ENV_API,
+  PUBLIC_API_ENDPOINTS,
+  setAuthTokenToCookie,
+} from "@/services/apis/apiConfig";
 import { logError } from "@/utils/logger";
 
 /**
@@ -34,7 +39,7 @@ const refreshAccessToken = async (): Promise<string | null> => {
     const parsed = z.object({ token: z.string() }).parse(response);
     const newAccessToken = parsed.token;
 
-    Cookies.set(ENV_API.ACCESS_TOKEN_COOKIE_NAME, newAccessToken);
+    setAuthTokenToCookie(newAccessToken);
     return newAccessToken;
   } catch (refreshError) {
     logError("Token refresh failed", refreshError, "AUTH");
@@ -57,10 +62,7 @@ let failedQueue: Array<{
 /**
  * Resolve or reject all queued requests depending on refresh outcome.
  */
-const processQueue = (
-  error: AxiosError | null,
-  token: string | null = null,
-) => {
+const processQueue = (error: AxiosError | null, token: string | null = null) => {
   failedQueue.forEach(({ resolve, reject }) => {
     if (error) {
       reject(error);
@@ -81,10 +83,7 @@ const processQueue = (
  *   - On 401 for non-public endpoints: performs token refresh with single-flight and retries queued requests.
  *   - Otherwise: normalizes and rejects with parsed API error.
  */
-export const setupInterceptors = (
-  instance: AxiosInstance,
-  logger: Logger,
-): void => {
+export const setupInterceptors = (instance: AxiosInstance, logger: Logger): void => {
   instance.interceptors.request.use(
     // Request interceptor: attach Authorization header if access token exists
     (config) => {
@@ -104,7 +103,7 @@ export const setupInterceptors = (
     // Response success interceptor: unwrap data and bump session timer for protected endpoints
     (response) => {
       // Determine if the current endpoint is public (no session extension)
-      const isPublic = ENV_API.PUBLIC_ENDPOINT.some((endpoint) =>
+      const isPublic = PUBLIC_API_ENDPOINTS.some((endpoint) =>
         (response?.config?.url || "").includes(endpoint),
       );
 
@@ -124,7 +123,7 @@ export const setupInterceptors = (
       const parsedError = parseErrorFromAPI(error);
       const statusCode = parsedError.status;
       // Do not attempt refresh for public endpoints
-      const isPublic = ENV_API.PUBLIC_ENDPOINT.some((subStr) =>
+      const isPublic = PUBLIC_API_ENDPOINTS.some((subStr) =>
         originalRequest?.url?.includes(subStr),
       );
 
@@ -171,9 +170,7 @@ export const setupInterceptors = (
             window.location.href = ROUTES_PATH.NOT_AUTHORIZED;
             return Promise.reject(parseErrorFromAPI(refreshError));
           } else {
-            const fallbackError = new AxiosError(
-              "Unknown error during token refresh",
-            );
+            const fallbackError = new AxiosError("Unknown error during token refresh");
             processQueue(fallbackError, null);
             clearAuthToken();
             // Redirect on unknown refresh error

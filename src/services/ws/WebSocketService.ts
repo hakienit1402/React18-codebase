@@ -1,7 +1,6 @@
 import { Client, IMessage } from "@stomp/stompjs";
 
 type MessageHandler = (msg: IMessage) => void;
-let connectPromise: Promise<void> | null = null;
 
 /**
  * Factory for a STOMP-over-WebSocket service.
@@ -13,6 +12,7 @@ let connectPromise: Promise<void> | null = null;
  * - Topic subscription management with idempotency
  */
 export function createWebSocketService(token: string) {
+  let connectPromise: Promise<void> | null = null;
   const wsUrl = (window as any)._env_?.VITE_WS_URL || "ws://localhost:8080/ws";
   const client = new Client({
     brokerURL: wsUrl,

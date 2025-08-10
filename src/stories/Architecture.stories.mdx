@@ -1,0 +1,37 @@
+import { Meta, Subtitle } from "@storybook/blocks";
+
+<Meta title="Intro/Architecture" />
+
+# Architecture Overview
+
+<Subtitle>Key patterns and modules used in the codebase.</Subtitle>
+
+## Stack
+
+- React 18 + Vite 6 + TypeScript
+- Radix UI + Tailwind CSS
+- React Query, Zustand
+- Axios + Interceptors
+
+## Structure
+
+```
+src/
+  components/     # Shared UI
+  domains/        # Feature domains (e.g., auth)
+  guards/         # Route guards
+  lib/            # Libraries (react-query config)
+  router/         # App routes
+  services/       # APIs & WebSocket
+  stores/         # Global stores
+  utils/          # Utilities
+```
+
+## Runtime env
+
+- `window._env_` injected at runtime (`/env.js`), used for API/WS URLs.
+
+## Testing
+
+- Vitest + Testing Library for unit tests
+- Cypress for E2E

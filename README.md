@@ -161,6 +161,19 @@ Docker Compose helper scripts also exist (`docker:*`) but require a `docker-comp
 - `npm run test:ui` opens the Vitest UI.
 - Storybook runs at `http://localhost:6006` via `npm run storybook`.
 
+### Storybook organization
+
+- Stories are grouped under categories for quick navigation (see `.storybook/preview.ts`):
+  - Form: form fields and integrated examples (RHF + Zod)
+  - Components:
+    - Inputs: `Input`, `Textarea`, `Checkbox`, `Switch`, `Slider`, `RadioGroup`, `Toggle`, `ToggleGroup`, `InputOTP`
+    - Data Display: `Avatar`, `Badge`, `Card`, `Separator`, `Skeleton`, `Progress`, `Label`
+    - Navigation: `Tabs`, `Breadcrumb`, `Menubar`, `NavigationMenu`, `Pagination`
+    - Overlays: `Tooltip`, `Popover`, `Dialog`, `Drawer`, `AlertDialog`, `HoverCard`, `Sheet`, `ContextMenu`
+    - Utility: `ScrollArea`, `Resizable`, `Command`, `Select`
+
+Most stories expose controls for essential props and include minimal interactive examples.
+
 ## Docker
 
 The production image serves the built app via NGINX and injects runtime env on startup.

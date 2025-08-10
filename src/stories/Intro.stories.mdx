@@ -1,0 +1,69 @@
+import { Meta, Subtitle } from "@storybook/blocks";
+
+<Meta title="Intro/Getting Started" />
+
+# Pulsar UI Kit
+
+<Subtitle>Quick start, conventions, and examples for the component library.</Subtitle>
+
+## Installation
+
+Run the app and Storybook:
+
+```bash
+npm install
+npm run dev      # app
+npm run storybook
+```
+
+## Conventions
+
+- Components are built on Radix primitives, styled with Tailwind.
+- Form fields integrate with react-hook-form (RHF). Validation via zod.
+- Prefer controlled stories for interactive components.
+
+## Folder structure
+
+```
+src/components/
+  Button/
+  Input/
+  Select/
+  ...
+```
+
+## Examples
+
+Below are inline examples of core components.
+
+### Button
+
+```tsx
+import { Button } from "@/components/Button";
+
+export const Example = () => (
+  <div className="flex gap-2">
+    <Button>Primary</Button>
+    <Button variant="secondary">Secondary</Button>
+    <Button variant="tertiary">Tertiary</Button>
+  </div>
+);
+```
+
+### Input with label
+
+```tsx
+import { Label } from "@/components/Label";
+import { Input } from "@/components/Input";
+
+export const Example = () => (
+  <label className="flex items-center gap-2">
+    <Label htmlFor="email">Email</Label>
+    <Input id="email" placeholder="your@email.com" />
+  </label>
+);
+```
+
+## Form + RHF + Zod
+
+See "Form/AllFieldsDemo" for a full example of RHF + Zod validation across fields.

@@ -1,6 +1,5 @@
 import axios, { AxiosInstance } from "axios";
 
-import { ROUTES_PATH } from "@/constants/router";
 import { removeSecureCookie, setSecureCookie } from "@/utils/cookies";
 
 /**
@@ -16,8 +15,12 @@ export const ENV_API = {
   API_URL: VITE_API_URL || "",
   TIMEOUT: 20000,
   ACCESS_TOKEN_COOKIE_NAME: "pulsar_access_token",
-  PUBLIC_ENDPOINT: [ROUTES_PATH.LOGIN],
 };
+
+/**
+ * List of public API endpoint substrings. Used by interceptors to skip refresh/session logic.
+ */
+export const PUBLIC_API_ENDPOINTS = ["/api/v1/auth", "/api/v1/auth/refresh"] as const;
 
 /**
  * Creates and configures the Axios instance.
@@ -45,10 +48,7 @@ export const createApiInstance = (): AxiosInstance => {
 /**
  * Creates a cancel token source for cancelable requests.
  */
-export const createCancelToken = () => {
-  const source = axios.CancelToken.source();
-  return source;
-};
+// Deprecated: axios CancelToken. Use AbortController instead.
 /**
  * Clears authentication cookies (access token, isAuthenticated flag).
  */

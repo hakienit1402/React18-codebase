@@ -8,7 +8,6 @@ import Select, {
 import AsyncCreatableSelect from "react-select/async-creatable";
 
 import * as CustomComponents from "@/components/SelectInput/customComponentAsync";
-import { MultiValueUnderlying } from "@/domains/pricer/containers/UnderlyingValue";
 import { cn } from "@/lib/utils";
 
 export interface SelectOptionTypes {
@@ -89,7 +88,7 @@ function AsyncCreateAbleSelectComponentInner<
     styles,
     minInputLength = 2,
     maxInputLength = 20,
-    isUnderlyingSelect = true,
+    // Note: isUnderlyingSelect is deprecated; MultiValueUnderlying is not bundled here.
     ...props
   }: (SelectProps<Option, IsMulti, Group> & {
     loadOptions: (
@@ -178,20 +177,11 @@ function AsyncCreateAbleSelectComponentInner<
             ? () => null
             : CustomComponents.MultiValueRemove,
           SingleValue: CustomComponents.SingleValue,
-          MultiValue: ({ ...props }) => {
-            if (isUnderlyingSelect) {
-              return (
-                <MultiValueUnderlying {...props}>
-                  {(props.data as OptionType).value}
-                </MultiValueUnderlying>
-              );
-            }
-            return (
-              <CustomComponents.MultiValue {...props}>
-                {(props.data as OptionType).value}
-              </CustomComponents.MultiValue>
-            );
-          },
+          MultiValue: ({ ...props }) => (
+            <CustomComponents.MultiValue {...props}>
+              {(props.data as OptionType).value}
+            </CustomComponents.MultiValue>
+          ),
           ...(showValueSelected && {
             ValueContainer: CustomComponents.ValueContainerCustom,
           }),
