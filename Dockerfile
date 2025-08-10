@@ -19,37 +19,9 @@ WORKDIR /usr/share/nginx/html
 # Copy built app
 COPY --from=builder /app/dist .
 
-# Replace default NGINX config with minimal SPA fallback and no-cache for env.js
-RUN rm -f /etc/nginx/conf.d/default.conf && \
-    cat > /etc/nginx/conf.d/app.conf <<'NGINX_CONF' && \
-map $sent_http_content_type $expires {
-  default off;
-  text/html 15m;
-  text/css 15m;
-  application/javascript 15m;
-  ~image/ 15m;
-}
-
-server {
-  listen 8080;
-  listen [::]:8080;
-  server_name localhost;
-
-  root /usr/share/nginx/html;
-  index index.html index.htm;
-
-  etag on;
-  expires $expires;
-
-  location / {
-    try_files $uri $uri/ /index.html;
-  }
-
-  location = /env.js {
-    add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0" always;
-  }
-}
-NGINX_CONF
+# Replace default NGINX config with external file for readability
+RUN rm -f /etc/nginx/conf.d/default.conf
+COPY deploy/nginx/app.conf /etc/nginx/conf.d/app.conf
 
 # Create entrypoint that generates env.js from VITE_* envs then chain to nginx
 RUN cat > /usr/local/bin/app-entrypoint.sh <<'ENTRYPOINT_SH' && \
