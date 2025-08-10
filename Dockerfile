@@ -23,32 +23,10 @@ COPY --from=builder /app/dist .
 RUN rm -f /etc/nginx/conf.d/default.conf
 COPY deploy/nginx/app.conf /etc/nginx/conf.d/app.conf
 
-# Create entrypoint that generates env.js from VITE_* envs then chain to nginx
-RUN cat > /usr/local/bin/app-entrypoint.sh <<'ENTRYPOINT_SH' && \
-    chmod +x /usr/local/bin/app-entrypoint.sh && \
+# Copy entrypoint that generates env.js from VITE_* envs then chain to nginx
+COPY deploy/entrypoint.sh /usr/local/bin/app-entrypoint.sh
+RUN chmod +x /usr/local/bin/app-entrypoint.sh && \
     chown -R nginx:nginx /usr/share/nginx/html /etc/nginx
-#!/bin/sh
-set -e
-HTML_DIR="/usr/share/nginx/html"
-OUT_FILE="$HTML_DIR/env.js"
-echo "[entrypoint] Generating $OUT_FILE from VITE_* envs"
-TMP_FILE="$(mktemp)"
-{
-  echo "window._env_ = {"
-  FIRST=1
-  for KEY in $(printenv | awk -F= '/^(VITE_)/{print $1}' | sort -u); do
-    VAL=$(printenv "$KEY" | sed -e 's/\\\\/\\\\\\\\/g' -e 's/\"/\\\"/g')
-    if [ "$FIRST" -eq 0 ]; then
-      echo ","
-    fi
-    printf "  %s: \"%s\"" "$KEY" "$VAL"
-    FIRST=0
-  done
-  echo "\n};"
-} > "$TMP_FILE"
-mv "$TMP_FILE" "$OUT_FILE"
-exec /docker-entrypoint.sh "$@"
-ENTRYPOINT_SH
 
 
 # ✅ Drop privileges after setup
