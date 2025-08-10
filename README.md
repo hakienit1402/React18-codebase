@@ -230,4 +230,4 @@ docker run --rm -p 8080:8080 \
 
 ## Contributing
 
-1) Create a feature branch  2) Add tests  3) Commit via `npm run commit`  4) Open a PR
+1. Create a feature branch 2) Add tests 3) Commit via `npm run commit` 4) Open a PR
