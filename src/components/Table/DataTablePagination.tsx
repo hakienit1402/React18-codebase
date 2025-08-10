@@ -8,11 +8,7 @@ import { QueriesFilterProps } from "@/types/global.type";
 interface DataDataTablePaginationProps<TData> {
   table: Table<TData>;
   queryParams: QueriesFilterProps;
-  onChangePageIndex: (
-    value: number,
-    startOffset?: string,
-    endOffset?: string,
-  ) => void;
+  onChangePageIndex: (value: number, startOffset?: string, endOffset?: string) => void;
   totalRecord: number;
   isLoading?: boolean;
 }
@@ -39,24 +35,9 @@ function DataTablePagination<TData>({
       if (pageIndex <= 3) {
         pages.push(1, 2, 3, 4, -1, totalPages);
       } else if (pageIndex > totalPages - 3) {
-        pages.push(
-          1,
-          -1,
-          totalPages - 3,
-          totalPages - 2,
-          totalPages - 1,
-          totalPages,
-        );
+        pages.push(1, -1, totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
       } else {
-        pages.push(
-          1,
-          -1,
-          pageIndex - 1,
-          pageIndex,
-          pageIndex + 1,
-          -1,
-          totalPages,
-        );
+        pages.push(1, -1, pageIndex - 1, pageIndex, pageIndex + 1, -1, totalPages);
       }
     }
 
@@ -77,9 +58,7 @@ function DataTablePagination<TData>({
     >
       <div className="text-muted-foreground flex flex-1 items-center text-sm">
         <p className="text-sm text-neutral-dark-500">{`Showing ${(pageIndex - 1) * pageSize + 1}-${
-          pageIndex * pageSize <= totalRecord
-            ? pageIndex * pageSize
-            : totalRecord
+          pageIndex * pageSize <= totalRecord ? pageIndex * pageSize : totalRecord
         } of ${totalRecord} entries`}</p>
       </div>
       <div className="flex items-center space-x-4">
@@ -141,8 +120,7 @@ function DataTablePagination<TData>({
 
 export default DataTablePagination;
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;
   pageIndex?: number;
   onChangeValue?: (value: number) => void;

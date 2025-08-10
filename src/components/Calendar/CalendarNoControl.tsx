@@ -94,11 +94,7 @@ export function CalendarNoControl({
           />
         </PopoverContent>
       </Popover>
-      {description && (
-        <span className="text-muted-foreground mt-1 text-xs">
-          {description}
-        </span>
-      )}
+      {description && <span className="text-muted-foreground mt-1 text-xs">{description}</span>}
     </div>
   );
 }

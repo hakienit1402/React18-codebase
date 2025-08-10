@@ -1,21 +1,9 @@
-import {
-  ColumnDef,
-  flexRender,
-  Row,
-  Table as TableType,
-} from "@tanstack/react-table";
+import { ColumnDef, flexRender, Row, Table as TableType } from "@tanstack/react-table";
 import { Fragment } from "react/jsx-runtime";
 
 import { ScrollArea } from "@/components/ScrollArea";
 import TableBodySkeleton from "@/components/Skeleton/TableBodySkeleton";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/Table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/Table";
 import DataTableEmptyContainer from "@/components/Table/DataTableEmptyContainer";
 import { TABLE_ACTIONS } from "@/constants/table";
 import { cn } from "@/lib/utils";
@@ -73,23 +61,15 @@ const DataTableList = <TData, TValue>({
     <div className="flex w-full flex-1 flex-col overflow-auto rounded-sm">
       {tableToolbar}
       <ScrollArea className="w-full">
-        <Table
-          className={cn("border-separate border-spacing-0", tableClassName)}
-        >
+        <Table className={cn("border-separate border-spacing-0", tableClassName)}>
           <TableHeader
-            className={cn(
-              "sticky top-0 z-10 border-b bg-common-background",
-              theadClassName,
-            )}
+            className={cn("sticky top-0 z-10 border-b bg-common-background", theadClassName)}
           >
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
-                  const isActionColumn =
-                    header.id === TABLE_ACTIONS && hasStickyView;
-                  const isHighlightColumn = highlightCells?.includes(
-                    header.column.getIndex() ?? 0,
-                  );
+                  const isActionColumn = header.id === TABLE_ACTIONS && hasStickyView;
+                  const isHighlightColumn = highlightCells?.includes(header.column.getIndex() ?? 0);
                   return (
                     <TableHead
                       key={header.id}
@@ -104,8 +84,7 @@ const DataTableList = <TData, TValue>({
                       className={cn(
                         "border-b",
                         {
-                          "sticky right-0 top-0 z-10 bg-common-background":
-                            isActionColumn,
+                          "sticky right-0 top-0 z-10 bg-common-background": isActionColumn,
                           static: !hasStickyView,
                         },
                         {
@@ -116,10 +95,7 @@ const DataTableList = <TData, TValue>({
                     >
                       {header.isPlaceholder
                         ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
+                        : flexRender(header.column.columnDef.header, header.getContext())}
                     </TableHead>
                   );
                 })}
@@ -136,8 +112,7 @@ const DataTableList = <TData, TValue>({
                 table.getRowModel().rows.map((row, rowIndex) => {
                   const subComp = renderSubComponent?.({ row });
                   const makeMainCellTransparent =
-                    hideLastRowBorderBottom &&
-                    rowIndex === table.getRowModel().rows.length - 1;
+                    hideLastRowBorderBottom && rowIndex === table.getRowModel().rows.length - 1;
                   return (
                     <Fragment key={row.id}>
                       <TableRow
@@ -146,14 +121,12 @@ const DataTableList = <TData, TValue>({
                         className={cn("row group", {
                           "peer shadow-none": subComp,
                           "cursor-pointer": enableSingleRowSelect,
-                          "bg-common-highlight":
-                            row.getIsSelected() && enableSingleRowSelect,
+                          "bg-common-highlight": row.getIsSelected() && enableSingleRowSelect,
                         })}
                         onClick={() => handleSingleRowSelect(row)}
                       >
                         {row.getVisibleCells().map((cell) => {
-                          const isActionColumn =
-                            cell.column.id === TABLE_ACTIONS && hasStickyView;
+                          const isActionColumn = cell.column.id === TABLE_ACTIONS && hasStickyView;
                           const isHighlightColumn = highlightCells?.includes(
                             cell.column.getIndex() ?? 0,
                           );
@@ -165,12 +138,10 @@ const DataTableList = <TData, TValue>({
                                 "group-hover:bg-common-highlight",
                                 {
                                   "border-b-0": subComp,
-                                  "border-b-transparent":
-                                    makeMainCellTransparent,
+                                  "border-b-transparent": makeMainCellTransparent,
                                 },
                                 {
-                                  "sticky right-0 z-[1] text-right":
-                                    isActionColumn,
+                                  "sticky right-0 z-[1] text-right": isActionColumn,
                                 },
                                 {
                                   "bg-common-surfaceOverlay group-hover:bg-common-surfaceOverlay":
@@ -183,10 +154,7 @@ const DataTableList = <TData, TValue>({
                                 tableCellClassName,
                               )}
                             >
-                              {flexRender(
-                                cell.column.columnDef.cell,
-                                cell.getContext(),
-                              )}
+                              {flexRender(cell.column.columnDef.cell, cell.getContext())}
                             </TableCell>
                           );
                         })}
@@ -206,13 +174,8 @@ const DataTableList = <TData, TValue>({
                 })
               ) : (
                 <TableRow>
-                  <TableCell
-                    colSpan={columns.length}
-                    className="h-36 rounded-md p-0 text-center"
-                  >
-                    <DataTableEmptyContainer
-                      className={emptyContainerClassName}
-                    >
+                  <TableCell colSpan={columns.length} className="h-36 rounded-md p-0 text-center">
+                    <DataTableEmptyContainer className={emptyContainerClassName}>
                       {emptyComponent ? (
                         emptyComponent
                       ) : (
@@ -228,11 +191,7 @@ const DataTableList = <TData, TValue>({
           )}
         </Table>
       </ScrollArea>
-      {footer && (
-        <div className="mt-3 flex w-full items-center justify-end gap-2">
-          {footer}
-        </div>
-      )}
+      {footer && <div className="mt-3 flex w-full items-center justify-end gap-2">{footer}</div>}
     </div>
   );
 };

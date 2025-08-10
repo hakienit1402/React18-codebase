@@ -7,8 +7,7 @@ vi.mock("@/domains/auth/services/api", () => {
   class MockAuthApiService {
     static instance: MockAuthApiService;
     static getInstance() {
-      if (!MockAuthApiService.instance)
-        MockAuthApiService.instance = new MockAuthApiService();
+      if (!MockAuthApiService.instance) MockAuthApiService.instance = new MockAuthApiService();
       return MockAuthApiService.instance;
     }
   }

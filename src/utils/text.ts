@@ -41,9 +41,7 @@ function camelToSnake(camel: string): string {
 
 //  camelCase -> Title Case
 function camelToTitleCase(camel: string): string {
-  return camel
-    .replace(/([A-Z])/g, " $1")
-    .replace(/^./, (match) => match.toUpperCase());
+  return camel.replace(/([A-Z])/g, " $1").replace(/^./, (match) => match.toUpperCase());
 }
 
 //  PascalCase -> kebab-case
@@ -63,9 +61,7 @@ function pascalToSnake(pascal: string): string {
 
 //  PascalCase -> Title Case
 function pascalToTitleCase(pascal: string): string {
-  return pascal
-    .replace(/([A-Z])/g, " $1")
-    .replace(/^./, (match) => match.toUpperCase());
+  return pascal.replace(/([A-Z])/g, " $1").replace(/^./, (match) => match.toUpperCase());
 }
 
 //  snake_case -> kebab-case
@@ -101,9 +97,7 @@ function titleToKebab(title: string): string {
 
 //  Title Case -> camelCase
 function titleToCamel(title: string): string {
-  return title
-    .toLowerCase()
-    .replace(/\s+(.)/g, (match) => match.charAt(1).toUpperCase());
+  return title.toLowerCase().replace(/\s+(.)/g, (match) => match.charAt(1).toUpperCase());
 }
 
 //  Title Case -> PascalCase

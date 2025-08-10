@@ -49,19 +49,9 @@ export type AlertVariantType =
   | "important"
   | "crucial";
 
-const Alert = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & AlertProps
->(
+const Alert = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & AlertProps>(
   (
-    {
-      className,
-      variant,
-      hasIcon = true,
-      hasTitle = false,
-      isDefaultAlert = true,
-      ...props
-    },
+    { className, variant, hasIcon = true, hasTitle = false, isDefaultAlert = true, ...props },
     ref,
   ) => {
     const ICON: Record<AlertVariantType, React.ReactNode> = {
@@ -79,11 +69,7 @@ const Alert = React.forwardRef<
         <div
           ref={ref}
           role="alert"
-          className={cn(
-            alertVariants({ variant }),
-            "w-full items-center pl-3 pr-4",
-            className,
-          )}
+          className={cn(alertVariants({ variant }), "w-full items-center pl-3 pr-4", className)}
           {...props}
         >
           {ICON[variant as AlertVariantType]}

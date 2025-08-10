@@ -57,11 +57,7 @@ export const checkDecimal176 = (value: string): boolean => {
  * @example checkDecimalSchema('1,234,567.89', 17, 6) => true
 
  */
-export const checkDecimalSchema = (
-  value: string,
-  precision: number,
-  scale: number,
-): boolean => {
+export const checkDecimalSchema = (value: string, precision: number, scale: number): boolean => {
   // Empty string is valid
   if (!value) return true;
 
@@ -105,14 +101,9 @@ export const downloadHelperWithSaveAs = (file: File, fileName: string) => {
   saveAs(file, fileName);
 };
 
-export function updateOptions(
-  uniqueOptions: SelectOptionTypes[],
-  editOptions: SelectOptionTypes,
-) {
+export function updateOptions(uniqueOptions: SelectOptionTypes[], editOptions: SelectOptionTypes) {
   if (!editOptions || !editOptions.value) return uniqueOptions;
-  const index = uniqueOptions.findIndex((item) =>
-    isEqual(editOptions.value, item.value),
-  );
+  const index = uniqueOptions.findIndex((item) => isEqual(editOptions.value, item.value));
   if (index !== -1) {
     const [firstItem] = uniqueOptions.splice(index, 1);
     uniqueOptions.unshift(firstItem);
@@ -138,20 +129,14 @@ export function formatCurrency(
 
   if (isNaN(num)) return "";
 
-  const formatted = num
-    .toFixed(decimalPlaces)
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  const formatted = num.toFixed(decimalPlaces).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
   return `${prefix} ${formatted} ${suffix}`;
 }
 
 export const removeCommas = (value: string) => value.replace(/,/g, "");
 
-export function getFirstNCharacters(
-  str: string,
-  n: number,
-  maxCharacter: number = 2,
-): string {
+export function getFirstNCharacters(str: string, n: number, maxCharacter: number = 2): string {
   const trimmedStr = str.trimStart();
 
   if (n <= 0) {

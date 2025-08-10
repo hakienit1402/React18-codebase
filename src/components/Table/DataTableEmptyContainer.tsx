@@ -2,10 +2,7 @@ import React from "react";
 
 import { cn } from "@/lib/utils";
 
-const DataTableEmptyContainer = ({
-  children,
-  className,
-}: React.HTMLAttributes<HTMLDivElement>) => {
+const DataTableEmptyContainer = ({ children, className }: React.HTMLAttributes<HTMLDivElement>) => {
   return (
     <div
       className={cn(
@@ -16,9 +13,7 @@ const DataTableEmptyContainer = ({
       {children ? (
         children
       ) : (
-        <span className="inline-block text-sm text-neutral-dark-500">
-          No data found.
-        </span>
+        <span className="inline-block text-sm text-neutral-dark-500">No data found.</span>
       )}
     </div>
   );

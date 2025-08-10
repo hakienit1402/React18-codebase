@@ -21,9 +21,7 @@ const CustomTabsPage = ({
   const location = useLocation();
 
   return (
-    <div
-      className={cn("flex w-full flex-col shadow-content", wrapperClassName)}
-    >
+    <div className={cn("flex w-full flex-col shadow-content", wrapperClassName)}>
       <div
         className={cn(
           "hide-scrollbar flex w-full justify-start rounded-none border-b border-neutral-dark-300",
@@ -31,10 +29,7 @@ const CustomTabsPage = ({
         )}
       >
         {data.map((tab) => (
-          <div
-            key={tab.pathname}
-            className={cn("py-2", tabItemWrapperClassName)}
-          >
+          <div key={tab.pathname} className={cn("py-2", tabItemWrapperClassName)}>
             <NavLink
               to={tab.value}
               className={cn(

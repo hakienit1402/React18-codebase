@@ -55,9 +55,7 @@ const SelectComponent = React.forwardRef(SelectComponentInner) as <
 >(
   props: SelectProps<Option, IsMulti, Group> &
     SelectComponentCustomProps & {
-      ref?: React.ForwardedRef<
-        React.ElementRef<typeof Select<Option, IsMulti, Group>>
-      >;
+      ref?: React.ForwardedRef<React.ElementRef<typeof Select<Option, IsMulti, Group>>>;
     },
 ) => ReturnType<typeof SelectComponentInner>;
 
@@ -84,9 +82,7 @@ function SelectComponentInner<
     menuClassName,
     ...props
   }: SelectProps<Option, IsMulti, Group> & SelectComponentCustomProps,
-  ref: React.ForwardedRef<
-    React.ElementRef<typeof Select<Option, IsMulti, Group>>
-  >,
+  ref: React.ForwardedRef<React.ElementRef<typeof Select<Option, IsMulti, Group>>>,
 ) {
   const Comp = createAble ? CreatableSelect : Select;
 
@@ -124,9 +120,7 @@ function SelectComponentInner<
         ClearIndicator: CustomComponents.ClearIndicator,
         IndicatorSeparator: () => null,
         LoadingIndicator: () => null,
-        MultiValueRemove: isDisabled
-          ? () => null
-          : CustomComponents.MultiValueRemove,
+        MultiValueRemove: isDisabled ? () => null : CustomComponents.MultiValueRemove,
         SingleValue: CustomComponents.SingleValue,
         MultiValue: CustomComponents.MultiValue,
         ...(showValueSelected && {
@@ -145,10 +139,8 @@ function SelectComponentInner<
             [CustomComponents.controlStyles.nonFocus]: !isFocused,
             [CustomComponents.controlStyles.error]: !!props.error,
             [CustomComponents.controlStyles.multi]: isMulti,
-            [CustomComponents.controlStyles.singleSmall]:
-              !isMulti && size === "small",
-            [CustomComponents.controlStyles.multiSmall]:
-              isMulti && size === "small",
+            [CustomComponents.controlStyles.singleSmall]: !isMulti && size === "small",
+            [CustomComponents.controlStyles.multiSmall]: isMulti && size === "small",
           }),
         option: ({ isDisabled, isSelected }) =>
           cn(CustomComponents.optionsStyle.base, {
@@ -158,12 +150,7 @@ function SelectComponentInner<
           }),
         placeholder: () => CustomComponents.placeholderStyles,
         input: () => CustomComponents.selectInputStyles,
-        menu: () =>
-          cn(
-            CustomComponents.menuStyles,
-            { "mt-5": hasDescription },
-            menuClassName,
-          ),
+        menu: () => cn(CustomComponents.menuStyles, { "mt-5": hasDescription }, menuClassName),
         valueContainer: () =>
           cn(CustomComponents.valueContainerStyles, {
             // '!px-1': size === 'small',
@@ -184,15 +171,9 @@ function SelectComponentInner<
         loadingIndicator: () => CustomComponents.loadingIndicatorStyles,
       }}
       {...props}
-      onChange={(
-        item: OnChangeValue<Option, IsMulti>,
-        action: ActionMeta<Option>,
-      ) => {
+      onChange={(item: OnChangeValue<Option, IsMulti>, action: ActionMeta<Option>) => {
         props.onChange?.(item, action);
-        extendOnchange?.(
-          item as SelectOptionTypes | SelectOptionTypes[],
-          action,
-        );
+        extendOnchange?.(item as SelectOptionTypes | SelectOptionTypes[], action);
       }}
     />
   );

@@ -1,11 +1,6 @@
 import { debounce } from "lodash";
 import { ComponentProps, useEffect, useMemo } from "react";
-import {
-  FieldPath,
-  FieldValues,
-  UseControllerProps,
-  useFormContext,
-} from "react-hook-form";
+import { FieldPath, FieldValues, UseControllerProps, useFormContext } from "react-hook-form";
 import useMeasure from "react-use-measure";
 
 import { CommonFieldProps } from "./form.type";
@@ -65,16 +60,10 @@ function SelectField<
           <FormItem ref={ref} className={formItemClassName}>
             {label && (
               <FormLabel className={labelClassName}>
-                {label}{" "}
-                {hasAsterisk && (
-                  <span className="ml-1 text-semantics-red-500">*</span>
-                )}
+                {label} {hasAsterisk && <span className="ml-1 text-semantics-red-500">*</span>}
               </FormLabel>
             )}
-            <div
-              data-testid={props.dataTestId}
-              className={cn("relative flex items-center", {})}
-            >
+            <div data-testid={props.dataTestId} className={cn("relative flex items-center", {})}>
               <FormControl>
                 <SelectInput
                   {...field}
@@ -84,22 +73,15 @@ function SelectField<
                   error={!!fieldState.error}
                   {...(checkMenuPlacement && {
                     menuPosition: "fixed",
-                    menuPlacement:
-                      innerHeight - bounds.bottom > 300 ? "bottom" : "top",
+                    menuPlacement: innerHeight - bounds.bottom > 300 ? "bottom" : "top",
                     maxMenuHeight:
-                      innerHeight - bounds.bottom > 300
-                        ? bounds.bottom - 5
-                        : bounds.top - 5,
+                      innerHeight - bounds.bottom > 300 ? bounds.bottom - 5 : bounds.top - 5,
                   })}
                 />
               </FormControl>
             </div>
-            {description && !fieldState.error && (
-              <FormDescription>{description}</FormDescription>
-            )}
-            {!hideErrorMessage && (
-              <FormMessage className={errorMessageClassName} />
-            )}
+            {description && !fieldState.error && <FormDescription>{description}</FormDescription>}
+            {!hideErrorMessage && <FormMessage className={errorMessageClassName} />}
           </FormItem>
         );
       }}

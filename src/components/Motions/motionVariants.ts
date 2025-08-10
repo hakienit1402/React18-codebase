@@ -169,12 +169,7 @@ export const glitchVariants: Variants = {
     filter: "none",
   },
   animate: {
-    clipPath: [
-      "inset(0 0 0 0)",
-      "inset(100% 0 0 0)",
-      "inset(50% 0 50% 0)",
-      "inset(0 0 0 0)",
-    ],
+    clipPath: ["inset(0 0 0 0)", "inset(100% 0 0 0)", "inset(50% 0 50% 0)", "inset(0 0 0 0)"],
     filter: ["none", "hue-rotate(90deg)", "hue-rotate(-90deg)", "none"],
     x: [0, -5, 5, 0],
     transition: {

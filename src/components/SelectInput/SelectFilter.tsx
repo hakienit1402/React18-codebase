@@ -87,9 +87,7 @@ const SelectFilterInput = memo(
               if (name === FILER_NAME_ENUM.REQUESTOR_ID) {
                 if (options.find((i) => i.value === currentUser?.userId)) {
                   setSelectedValue([
-                    options.find(
-                      (i) => i.value === currentUser?.userId,
-                    ) as SelectOptionTypes,
+                    options.find((i) => i.value === currentUser?.userId) as SelectOptionTypes,
                   ]);
                 }
               }
@@ -116,18 +114,11 @@ const SelectFilterInput = memo(
         });
         return;
       }
-      const selectedValueSortByAlphabet = selectedValue
-        .map((i) => i.value)
-        .sort();
+      const selectedValueSortByAlphabet = selectedValue.map((i) => i.value).sort();
       const currentSelectedFromParamsSortByAlphabet = currentSelectedFromParams
         .map((i) => i.value)
         .sort();
-      if (
-        isEqual(
-          selectedValueSortByAlphabet,
-          currentSelectedFromParamsSortByAlphabet,
-        )
-      ) {
+      if (isEqual(selectedValueSortByAlphabet, currentSelectedFromParamsSortByAlphabet)) {
         return;
       } else
         setTimeout(() => {
@@ -155,21 +146,14 @@ const SelectFilterInput = memo(
           module === FILTER_MODULES_ENUM.FCN_PRICING_BATCHES
         ) {
           if (name === FILER_NAME_ENUM.REQUESTOR_ID) {
-            const currentRequestIdObj = JSON.parse(
-              localStorage.getItem("requestorId") || "{}",
-            ) as {
+            const currentRequestIdObj = JSON.parse(localStorage.getItem("requestorId") || "{}") as {
               [key: string]: string;
             };
             const requestorIdOf =
-              module === FILTER_MODULES_ENUM.ELN_PRICING_BATCHES
-                ? "ELN"
-                : "FCN";
+              module === FILTER_MODULES_ENUM.ELN_PRICING_BATCHES ? "ELN" : "FCN";
             delete currentRequestIdObj[requestorIdOf as string];
             const newRequesterIdObj = { ...currentRequestIdObj };
-            localStorage.setItem(
-              "requestorId",
-              JSON.stringify(newRequesterIdObj),
-            );
+            localStorage.setItem("requestorId", JSON.stringify(newRequesterIdObj));
             window.dispatchEvent(new Event("storage"));
             navigate({
               pathname: location.pathname,
@@ -198,23 +182,16 @@ const SelectFilterInput = memo(
           module === FILTER_MODULES_ENUM.FCN_PRICING_BATCHES
         ) {
           if (name === FILER_NAME_ENUM.REQUESTOR_ID) {
-            const currentRequestIdObj = JSON.parse(
-              localStorage.getItem("requestorId") || "{}",
-            ) as {
+            const currentRequestIdObj = JSON.parse(localStorage.getItem("requestorId") || "{}") as {
               [key: string]: string;
             };
             const requestorIdOf =
-              module === FILTER_MODULES_ENUM.ELN_PRICING_BATCHES
-                ? "ELN"
-                : "FCN";
+              module === FILTER_MODULES_ENUM.ELN_PRICING_BATCHES ? "ELN" : "FCN";
             const newRequesterIdObj = {
               ...currentRequestIdObj,
               [requestorIdOf as string]: value.value,
             };
-            localStorage.setItem(
-              "requestorId",
-              JSON.stringify(newRequesterIdObj),
-            );
+            localStorage.setItem("requestorId", JSON.stringify(newRequesterIdObj));
             window.dispatchEvent(new Event("storage"));
           }
         }
@@ -241,10 +218,7 @@ const SelectFilterInput = memo(
         value={selectedValue}
         size="small"
         onBlur={() => handleBlur()}
-        onChange={(
-          value: unknown,
-          action: ActionMeta<SelectOptionTypes | unknown>,
-        ) => {
+        onChange={(value: unknown, action: ActionMeta<SelectOptionTypes | unknown>) => {
           if (isMulti) {
             if (action?.action === "clear") {
               setSelectedValue([]);

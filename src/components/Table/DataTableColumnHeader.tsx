@@ -10,8 +10,7 @@ import SortDescIcon from "@/components/Icons/SortDescIcon";
 import { QUERY_DEFAULT } from "@/constants/table";
 import { cn } from "@/lib/utils";
 
-interface DataTableColumnHeaderProps<TData, TValue>
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface DataTableColumnHeaderProps<TData, TValue> extends React.HTMLAttributes<HTMLDivElement> {
   column: Column<TData, TValue>;
   title: string;
   headerTitleCustom?: React.ReactNode;
@@ -52,10 +51,7 @@ function DataTableColumnHeader<TData, TValue>({
     }
     if (params["sortBy"] === column.id && params["order"] === "asc") {
       column.toggleSorting(false);
-    } else if (
-      params["sortBy"] === `${column.id}` &&
-      params["order"] === "desc"
-    ) {
+    } else if (params["sortBy"] === `${column.id}` && params["order"] === "desc") {
       column.toggleSorting(true);
     }
   }, [column, location.search]);
@@ -63,10 +59,7 @@ function DataTableColumnHeader<TData, TValue>({
   if (!column.getCanSort()) {
     return (
       <div className={customContainerClassName}>
-        <span
-          className={cn("inline-block text-neutral-dark-600", className)}
-          style={{ width }}
-        >
+        <span className={cn("inline-block text-neutral-dark-600", className)} style={{ width }}>
           {headerTitleCustom || title}
         </span>
         {childAction}
@@ -96,10 +89,7 @@ function DataTableColumnHeader<TData, TValue>({
         break;
     }
 
-    navigate(
-      { search: queryString.stringify(params) },
-      { state: location.state },
-    );
+    navigate({ search: queryString.stringify(params) }, { state: location.state });
   };
 
   const handleSortInternal = () => {
@@ -120,17 +110,9 @@ function DataTableColumnHeader<TData, TValue>({
   };
 
   return (
-    <div
-      key={column.id}
-      className={cn("flex flex-col gap-2 py-2", customContainerClassName)}
-    >
-      <div
-        className={cn("flex items-center gap-x-1", textClassName)}
-        style={{ width }}
-      >
-        <span className="inline-block whitespace-nowrap text-neutral-dark-600">
-          {title}
-        </span>
+    <div key={column.id} className={cn("flex flex-col gap-2 py-2", customContainerClassName)}>
+      <div className={cn("flex items-center gap-x-1", textClassName)} style={{ width }}>
+        <span className="inline-block whitespace-nowrap text-neutral-dark-600">{title}</span>
         {sortInternalComponent ? (
           sortInternalComponent
         ) : (

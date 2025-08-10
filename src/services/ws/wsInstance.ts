@@ -17,9 +17,7 @@ export function initWebSocket(token: string) {
  */
 export function getWebSocketInstance() {
   if (!wsInstance) {
-    throw new Error(
-      "WebSocket not initialized. Call initWebSocket(token) first.",
-    );
+    throw new Error("WebSocket not initialized. Call initWebSocket(token) first.");
   }
   return wsInstance;
 }

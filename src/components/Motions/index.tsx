@@ -26,10 +26,7 @@ interface BaseImageProps extends Omit<HTMLMotionProps<"img">, "children"> {
 }
 
 // Shake Components
-export const ShakeDiv: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const ShakeDiv: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.div
     variants={motionVariants.shakeVariants}
     initial="initial"
@@ -53,12 +50,7 @@ export const FadeDiv: React.FC<BaseMotionProps> = ({ children, className }) => (
   </motion.div>
 );
 
-export const FadeImage: React.FC<BaseImageProps> = ({
-  src,
-  alt,
-  className,
-  ...props
-}) => (
+export const FadeImage: React.FC<BaseImageProps> = ({ src, alt, className, ...props }) => (
   <motion.img
     src={src}
     alt={alt}
@@ -71,10 +63,7 @@ export const FadeImage: React.FC<BaseImageProps> = ({
   />
 );
 
-export const FadeSpan: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const FadeSpan: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.span
     variants={motionVariants.fadeVariants}
     initial="hidden"
@@ -98,10 +87,7 @@ export const FadeP: React.FC<BaseMotionProps> = ({ children, className }) => (
   </motion.p>
 );
 
-export const FadeButton: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const FadeButton: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.button
     variants={motionVariants.fadeVariants}
     initial="hidden"
@@ -114,10 +100,7 @@ export const FadeButton: React.FC<BaseMotionProps> = ({
 );
 
 // Slide Components
-export const SlideDiv: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const SlideDiv: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.div
     variants={motionVariants.slideVariants}
     initial="left"
@@ -129,12 +112,7 @@ export const SlideDiv: React.FC<BaseMotionProps> = ({
   </motion.div>
 );
 
-export const SlideImage: React.FC<BaseImageProps> = ({
-  src,
-  alt,
-  className,
-  ...props
-}) => (
+export const SlideImage: React.FC<BaseImageProps> = ({ src, alt, className, ...props }) => (
   <motion.img
     src={src}
     alt={alt}
@@ -147,10 +125,7 @@ export const SlideImage: React.FC<BaseImageProps> = ({
   />
 );
 
-export const SlideSpan: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const SlideSpan: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.span
     variants={motionVariants.slideVariants}
     initial="left"
@@ -174,10 +149,7 @@ export const SlideP: React.FC<BaseMotionProps> = ({ children, className }) => (
   </motion.p>
 );
 
-export const SlideButton: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const SlideButton: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.button
     variants={motionVariants.slideVariants}
     initial="left"
@@ -190,10 +162,7 @@ export const SlideButton: React.FC<BaseMotionProps> = ({
 );
 
 // Scale Components
-export const ScaleDiv: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const ScaleDiv: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.div
     variants={motionVariants.scaleVariants}
     initial="initial"
@@ -205,12 +174,7 @@ export const ScaleDiv: React.FC<BaseMotionProps> = ({
   </motion.div>
 );
 
-export const ScaleImage: React.FC<BaseImageProps> = ({
-  src,
-  alt,
-  className,
-  ...props
-}) => (
+export const ScaleImage: React.FC<BaseImageProps> = ({ src, alt, className, ...props }) => (
   <motion.img
     src={src}
     alt={alt}
@@ -223,10 +187,7 @@ export const ScaleImage: React.FC<BaseImageProps> = ({
   />
 );
 
-export const ScaleSpan: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const ScaleSpan: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.span
     variants={motionVariants.scaleVariants}
     initial="initial"
@@ -250,10 +211,7 @@ export const ScaleP: React.FC<BaseMotionProps> = ({ children, className }) => (
   </motion.p>
 );
 
-export const ScaleButton: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const ScaleButton: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.button
     variants={motionVariants.scaleVariants}
     initial="initial"
@@ -266,10 +224,7 @@ export const ScaleButton: React.FC<BaseMotionProps> = ({
 );
 
 // Rotate Components
-export const RotateDiv: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const RotateDiv: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.div
     whileHover="hover"
     variants={motionVariants.rotateVariants}
@@ -281,12 +236,7 @@ export const RotateDiv: React.FC<BaseMotionProps> = ({
   </motion.div>
 );
 
-export const RotateImage: React.FC<BaseImageProps> = ({
-  src,
-  alt,
-  className,
-  ...props
-}) => (
+export const RotateImage: React.FC<BaseImageProps> = ({ src, alt, className, ...props }) => (
   <motion.img
     src={src}
     alt={alt}
@@ -299,10 +249,7 @@ export const RotateImage: React.FC<BaseImageProps> = ({
   />
 );
 
-export const RotateSpan: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const RotateSpan: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.span
     variants={motionVariants.rotateVariants}
     initial="initial"
@@ -314,10 +261,7 @@ export const RotateSpan: React.FC<BaseMotionProps> = ({
   </motion.span>
 );
 
-export const RotateButton: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const RotateButton: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.button
     variants={motionVariants.rotateVariants}
     initial="initial"
@@ -330,10 +274,7 @@ export const RotateButton: React.FC<BaseMotionProps> = ({
 );
 
 // Bounce Components
-export const BounceDiv: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const BounceDiv: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.div
     variants={motionVariants.bounceVariants}
     initial="initial"
@@ -344,12 +285,7 @@ export const BounceDiv: React.FC<BaseMotionProps> = ({
   </motion.div>
 );
 
-export const BounceImage: React.FC<BaseImageProps> = ({
-  src,
-  alt,
-  className,
-  ...props
-}) => (
+export const BounceImage: React.FC<BaseImageProps> = ({ src, alt, className, ...props }) => (
   <motion.img
     src={src}
     alt={alt}
@@ -361,10 +297,7 @@ export const BounceImage: React.FC<BaseImageProps> = ({
   />
 );
 
-export const BounceSpan: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const BounceSpan: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.span
     variants={motionVariants.bounceVariants}
     initial="initial"
@@ -375,10 +308,7 @@ export const BounceSpan: React.FC<BaseMotionProps> = ({
   </motion.span>
 );
 
-export const BounceButton: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const BounceButton: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.button
     variants={motionVariants.bounceVariants}
     initial="initial"
@@ -390,10 +320,7 @@ export const BounceButton: React.FC<BaseMotionProps> = ({
 );
 
 // Interactive Components
-export const InteractiveDiv: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const InteractiveDiv: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.div
     variants={motionVariants.interactionVariants}
     initial="initial"
@@ -405,12 +332,7 @@ export const InteractiveDiv: React.FC<BaseMotionProps> = ({
   </motion.div>
 );
 
-export const InteractiveImage: React.FC<BaseImageProps> = ({
-  src,
-  alt,
-  className,
-  ...props
-}) => (
+export const InteractiveImage: React.FC<BaseImageProps> = ({ src, alt, className, ...props }) => (
   <motion.img
     src={src}
     alt={alt}
@@ -423,10 +345,7 @@ export const InteractiveImage: React.FC<BaseImageProps> = ({
   />
 );
 
-export const InteractiveButton: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const InteractiveButton: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.button
     variants={motionVariants.interactionVariants}
     initial="initial"
@@ -439,10 +358,7 @@ export const InteractiveButton: React.FC<BaseMotionProps> = ({
 );
 
 // Spring Components
-export const SpringDiv: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const SpringDiv: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.div
     variants={motionVariants.springVariants}
     initial="initial"
@@ -453,12 +369,7 @@ export const SpringDiv: React.FC<BaseMotionProps> = ({
   </motion.div>
 );
 
-export const SpringImage: React.FC<BaseImageProps> = ({
-  src,
-  alt,
-  className,
-  ...props
-}) => (
+export const SpringImage: React.FC<BaseImageProps> = ({ src, alt, className, ...props }) => (
   <motion.img
     src={src}
     alt={alt}
@@ -470,10 +381,7 @@ export const SpringImage: React.FC<BaseImageProps> = ({
   />
 );
 
-export const SpringButton: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const SpringButton: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.button
     variants={motionVariants.springVariants}
     initial="initial"
@@ -485,10 +393,7 @@ export const SpringButton: React.FC<BaseMotionProps> = ({
 );
 
 // HoverCard Component
-export const HoverCard: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const HoverCard: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.div
     variants={motionVariants.advancedHoverVariants}
     initial="initial"
@@ -522,20 +427,14 @@ export const MotionContainer: React.FC<StaggerContainerProps> = ({
   </motion.div>
 );
 
-export const MotionItem: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const MotionItem: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.div variants={motionVariants.itemVariants} className={className}>
     {children}
   </motion.div>
 );
 
 // Pulse Components
-export const PulseDiv: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const PulseDiv: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.div
     className={className}
     animate={{
@@ -551,10 +450,7 @@ export const PulseDiv: React.FC<BaseMotionProps> = ({
   </motion.div>
 );
 
-export const PulseButton: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const PulseButton: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.button
     className={className}
     animate={{
@@ -570,12 +466,7 @@ export const PulseButton: React.FC<BaseMotionProps> = ({
   </motion.button>
 );
 
-export const PulseImage: React.FC<BaseImageProps> = ({
-  src,
-  alt,
-  className,
-  ...props
-}) => (
+export const PulseImage: React.FC<BaseImageProps> = ({ src, alt, className, ...props }) => (
   <motion.img
     src={src}
     alt={alt}
@@ -694,16 +585,8 @@ export const CombinedEffectCard: React.FC<CombinedEffectProps> = ({
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const rotateX = useTransform(
-    mouseY,
-    [-100, 100],
-    [rotateRange, -rotateRange],
-  );
-  const rotateY = useTransform(
-    mouseX,
-    [-100, 100],
-    [-rotateRange, rotateRange],
-  );
+  const rotateX = useTransform(mouseY, [-100, 100], [rotateRange, -rotateRange]);
+  const rotateY = useTransform(mouseX, [-100, 100], [-rotateRange, rotateRange]);
 
   const transformStyle = {
     perspective,
@@ -752,11 +635,7 @@ interface TypewriterProps {
   cursor?: boolean;
 }
 
-export const TypewriterText: React.FC<TypewriterProps> = ({
-  text,
-  className,
-  cursor = true,
-}) => {
+export const TypewriterText: React.FC<TypewriterProps> = ({ text, className, cursor = true }) => {
   return (
     <motion.div
       style={{
@@ -786,10 +665,7 @@ interface DraggableProps extends BaseMotionProps {
   dragElastic?: number | boolean;
   dragMomentum?: boolean;
   onDragEnd?: (
-    event:
-      | globalThis.MouseEvent
-      | globalThis.TouchEvent
-      | globalThis.PointerEvent,
+    event: globalThis.MouseEvent | globalThis.TouchEvent | globalThis.PointerEvent,
   ) => void;
 }
 
@@ -838,10 +714,7 @@ export const DraggableItem: React.FC<DraggableProps> = ({
 );
 
 // Glitch Components
-export const GlitchText: React.FC<BaseMotionProps> = ({
-  children,
-  className,
-}) => (
+export const GlitchText: React.FC<BaseMotionProps> = ({ children, className }) => (
   <motion.span
     variants={motionVariants.glitchVariants}
     initial="initial"
@@ -852,12 +725,7 @@ export const GlitchText: React.FC<BaseMotionProps> = ({
   </motion.span>
 );
 
-export const GlitchImage: React.FC<BaseImageProps> = ({
-  src,
-  alt,
-  className,
-  ...props
-}) => (
+export const GlitchImage: React.FC<BaseImageProps> = ({ src, alt, className, ...props }) => (
   <motion.img
     src={src}
     alt={alt}
@@ -1069,9 +937,7 @@ export const MagneticGallery: React.FC<MagneticGalleryProps> = ({
   strength = 30,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [items, setItems] = useState<
-    Array<{ x: MotionValue<number>; y: MotionValue<number> }>
-  >([]);
+  const [items, setItems] = useState<Array<{ x: MotionValue<number>; y: MotionValue<number> }>>([]);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   useEffect(() => {
@@ -1268,8 +1134,7 @@ export const SlideIn: React.FC<SlideInProps> = ({
 
   const slideVariants = {
     hidden: {
-      x:
-        direction === "left" ? -distance : direction === "right" ? distance : 0,
+      x: direction === "left" ? -distance : direction === "right" ? distance : 0,
       y: direction === "up" ? distance : direction === "down" ? -distance : 0,
       opacity: 0,
     },

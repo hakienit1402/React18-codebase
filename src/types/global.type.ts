@@ -42,16 +42,9 @@ export type QueriesFilterProps = PaginationProps &
   SortProps &
   AdditionalFilterProps;
 
-export type QueryOptionProps<T> = Omit<
-  UseQueryOptions<T>,
-  "queryKey" | "queryFn"
->;
+export type QueryOptionProps<T> = Omit<UseQueryOptions<T>, "queryKey" | "queryFn">;
 
-export type MutationOptionProps<
-  TData,
-  TError = APIError,
-  TVariables = void,
-> = Omit<
+export type MutationOptionProps<TData, TError = APIError, TVariables = void> = Omit<
   UseMutationOptions<TData, TError, TVariables>,
   "mutationKey" | "mutationFn"
 >;

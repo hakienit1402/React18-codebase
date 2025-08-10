@@ -41,11 +41,7 @@ module.exports = {
     "import/order": [
       "warn",
       {
-        groups: [
-          ["builtin", "external"],
-          "internal",
-          ["parent", "sibling", "index"],
-        ],
+        groups: [["builtin", "external"], "internal", ["parent", "sibling", "index"]],
         "newlines-between": "always",
         alphabetize: { order: "asc", caseInsensitive: true },
       },
@@ -59,14 +55,13 @@ module.exports = {
       rules: {},
     },
     {
-      files: [
-        "**/*.config.ts",
-        "vite.config.ts",
-        "vitest.config.ts",
-        "**/*.stories.tsx",
-      ],
+      files: ["**/*.config.ts", "vite.config.ts", "vitest.config.ts", "**/*.stories.tsx"],
       parser: "@typescript-eslint/parser",
       parserOptions: {},
+      rules: {
+        // Allow hooks in Storybook story render functions
+        "react-hooks/rules-of-hooks": "off",
+      },
     },
     {
       files: ["**/*.js", "**/*.cjs", "**/*.mjs"],

@@ -1,9 +1,9 @@
-import { FieldPath, FieldValues, UseControllerProps, useFormContext } from 'react-hook-form';
+import { FieldPath, FieldValues, UseControllerProps, useFormContext } from "react-hook-form";
 
-import { Checkbox } from '@/components/Checkbox';
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/Form';
-import { CommonFieldProps } from '@/components/Form/form.type';
-import { cn } from '@/lib/utils';
+import { Checkbox } from "@/components/Checkbox";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/Form";
+import { CommonFieldProps } from "@/components/Form/form.type";
+import { cn } from "@/lib/utils";
 
 interface BooleanCheckboxOption {
   key: string;
@@ -38,7 +38,7 @@ function BooleanCheckboxGroupField<
   const { control: controlContext } = useFormContext<TFieldValues, TName>();
 
   const safeObject = (val: unknown) =>
-    typeof val === 'object' && val !== null ? (val as Record<string, boolean>) : {};
+    typeof val === "object" && val !== null ? (val as Record<string, boolean>) : {};
 
   return (
     <FormField
@@ -54,7 +54,7 @@ function BooleanCheckboxGroupField<
                 {label} {hasAsterisk && <span className="ml-1 text-semantics-red-500">*</span>}
               </FormLabel>
             )}
-            <div className={cn('flex flex-col gap-2', layoutClassName)}>
+            <div className={cn("flex flex-col gap-2", layoutClassName)}>
               {options.map((option) => {
                 const checkboxId = `${name}-${option.key}`;
                 const isChecked = currentValue[option.key] || false;
@@ -64,8 +64,8 @@ function BooleanCheckboxGroupField<
                     key={option.key}
                     htmlFor={checkboxId}
                     className={cn(
-                      'flex cursor-pointer items-start gap-2',
-                      option.disabled && 'cursor-not-allowed opacity-60'
+                      "flex cursor-pointer items-start gap-2",
+                      option.disabled && "cursor-not-allowed opacity-60",
                     )}
                   >
                     <FormControl>
@@ -90,8 +90,8 @@ function BooleanCheckboxGroupField<
                       <FormLabel
                         htmlFor={checkboxId}
                         className={cn(
-                          'm-0 cursor-pointer text-sm font-normal text-neutral-light-300',
-                          option.disabled && 'cursor-not-allowed'
+                          "m-0 cursor-pointer text-sm font-normal text-neutral-light-300",
+                          option.disabled && "cursor-not-allowed",
                         )}
                       >
                         {option.label}
@@ -105,7 +105,7 @@ function BooleanCheckboxGroupField<
               })}
             </div>
             {!hideErrorMessage && fieldState.error && (
-              <FormMessage className={cn('text-sm text-semantics-red-500', errorMessageClassName)}>
+              <FormMessage className={cn("text-sm text-semantics-red-500", errorMessageClassName)}>
                 {fieldState.error.message}
               </FormMessage>
             )}

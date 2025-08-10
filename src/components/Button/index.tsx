@@ -44,12 +44,7 @@ export interface ButtonProps
   isLoading?: boolean;
 }
 
-export type ButtonVariantProps =
-  | "primary"
-  | "secondary"
-  | "tertiary"
-  | "outline"
-  | "ghost";
+export type ButtonVariantProps = "primary" | "secondary" | "tertiary" | "outline" | "ghost";
 export type ButtonSizeProps = "default" | "sm" | "lg" | "icon";
 
 const RIPPLE_COLOR: Record<ButtonVariantProps, string> = {

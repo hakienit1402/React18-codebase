@@ -21,12 +21,7 @@ const SuccessIconNoti = ({ ...props }: React.SVGProps<SVGSVGElement>) => {
       </g>
       <defs>
         <clipPath id="clip0_12178_8985">
-          <rect
-            width="32"
-            height="32"
-            fill="white"
-            transform="translate(8 8)"
-          />
+          <rect width="32" height="32" fill="white" transform="translate(8 8)" />
         </clipPath>
       </defs>
     </svg>

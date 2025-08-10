@@ -3,9 +3,7 @@ import * as React from "react";
 const MOBILE_BREAKPOINT = 768;
 
 export function useIsMobile(breakpoint?: number) {
-  const [isMobile, setIsMobile] = React.useState<boolean | undefined>(
-    undefined,
-  );
+  const [isMobile, setIsMobile] = React.useState<boolean | undefined>(undefined);
   const breakpointWidth = breakpoint || MOBILE_BREAKPOINT;
 
   React.useEffect(() => {

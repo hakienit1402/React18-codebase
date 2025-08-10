@@ -35,10 +35,7 @@ const TabsPage = ({
 
   return (
     <Tabs
-      className={cn(
-        "flex w-full flex-1 flex-col rounded-sm shadow-content",
-        wrapperClassName,
-      )}
+      className={cn("flex w-full flex-1 flex-col rounded-sm shadow-content", wrapperClassName)}
       value={location.pathname}
     >
       <div className="flex items-center justify-between gap-6">
@@ -75,9 +72,7 @@ const TabsPage = ({
             </TabsTrigger>
           ))}
         </TabsList>
-        {!!footerAction && (
-          <div className="flex items-center pl-6">{footerAction}</div>
-        )}
+        {!!footerAction && <div className="flex items-center pl-6">{footerAction}</div>}
       </div>
       <TabsContent value={location.pathname} className="contents">
         {children}

@@ -2,8 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-export interface TextareaProps
-  extends React.InputHTMLAttributes<HTMLTextAreaElement> {
+export interface TextareaProps extends React.InputHTMLAttributes<HTMLTextAreaElement> {
   extendOnchange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;

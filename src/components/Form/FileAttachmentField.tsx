@@ -1,10 +1,5 @@
 import { ComponentProps, useEffect, useRef } from "react";
-import {
-  FieldPath,
-  FieldValues,
-  UseControllerProps,
-  useFormContext,
-} from "react-hook-form";
+import { FieldPath, FieldValues, UseControllerProps, useFormContext } from "react-hook-form";
 
 import FileAttachment from "../FileAttachment";
 import { CommonFieldProps } from "./form.type";
@@ -58,11 +53,7 @@ function FileAttachmentField<
 
   useEffect(() => {
     const errors = formState.errors;
-    if (
-      Object.keys(errors).length === 1 &&
-      errors[name] &&
-      fileAttachmentRef.current
-    ) {
+    if (Object.keys(errors).length === 1 && errors[name] && fileAttachmentRef.current) {
       fileAttachmentRef.current.scrollIntoView({
         behavior: "smooth",
         block: "start",
@@ -79,10 +70,7 @@ function FileAttachmentField<
           <FormItem className={formItemClassName}>
             {label && (
               <FormLabel className={labelClassName}>
-                {label}{" "}
-                {hasAsterisk && (
-                  <span className="ml-1 text-semantics-red-500">*</span>
-                )}
+                {label} {hasAsterisk && <span className="ml-1 text-semantics-red-500">*</span>}
               </FormLabel>
             )}
             <div className={cn("relative flex items-center", {})}>
@@ -96,14 +84,11 @@ function FileAttachmentField<
                         message:
                           status?.errors?.map((error) => {
                             switch (error) {
-                              case ERROR_MESSAGES_CODE.UPLOAD_ERROR
-                                .FILE_TOO_LARGE:
+                              case ERROR_MESSAGES_CODE.UPLOAD_ERROR.FILE_TOO_LARGE:
                                 return `Upload failed. Please make sure it does not exceed maximum size of ${textObject?.maxSizeText || "10MB"}.`;
-                              case ERROR_MESSAGES_CODE.UPLOAD_ERROR
-                                .FILE_INVALID_TYPE:
+                              case ERROR_MESSAGES_CODE.UPLOAD_ERROR.FILE_INVALID_TYPE:
                                 return "Invalid data format!";
-                              case ERROR_MESSAGES_CODE.UPLOAD_ERROR
-                                .FILE_TOO_MANY:
+                              case ERROR_MESSAGES_CODE.UPLOAD_ERROR.FILE_TOO_MANY:
                                 return "Invalid data format!";
                               default:
                                 return "";
@@ -125,14 +110,9 @@ function FileAttachmentField<
                 />
               </FormControl>
             </div>
-            {description && !fieldState.error && (
-              <FormDescription>{description}</FormDescription>
-            )}
+            {description && !fieldState.error && <FormDescription>{description}</FormDescription>}
             {!hideErrorMessage && (
-              <FormMessage
-                ref={fileAttachmentRef}
-                className={errorMessageClassName}
-              />
+              <FormMessage ref={fileAttachmentRef} className={errorMessageClassName} />
             )}
           </FormItem>
         );

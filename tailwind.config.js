@@ -183,14 +183,11 @@ export default {
         form: "0px 0px 0px 3px rgba(0, 51, 153, 0.15) ",
         "form-error": "0px 0px 0px 3px rgba(153 ,26 ,61, 0.15) ",
         sidebar: "0px 2px 4px 0px rgba(23, 39, 51, 0.11)",
-        dropdown:
-          "rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em",
+        dropdown: "rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em",
         "header-table-row": "0px -1px 0px 0px #211f29 inset",
         "right-table-row": "-1px 0px 0px 0px #211f29 inset",
-        "right-bottom-table-row":
-          "-1px 0px 0px 0px #211f29 inset, 0px -1px 0px 0px #211f29 inset;",
-        "left-bottom-table-row":
-          "-1px 0px 0px 0px #211f29 inset, 0px -1px 0px 0px #211f29 inset;",
+        "right-bottom-table-row": "-1px 0px 0px 0px #211f29 inset, 0px -1px 0px 0px #211f29 inset;",
+        "left-bottom-table-row": "-1px 0px 0px 0px #211f29 inset, 0px -1px 0px 0px #211f29 inset;",
         "bottom-table-row": "0px -1px 0px 0px #211f29 inset;",
         "top-table-row": "0px 1px 0px 0px #211f29 inset;",
         content: "0px 2px 4px 0px rgba(23, 39, 51, 0.11);",

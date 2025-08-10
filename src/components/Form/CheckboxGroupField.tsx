@@ -7,20 +7,13 @@ import {
 } from "react-hook-form";
 
 import { Checkbox } from "@/components/Checkbox";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/Form";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/Form";
 import { CommonFieldProps } from "@/components/Form/form.type";
 import { SelectOptionTypes } from "@/components/SelectInput";
 import { cn } from "@/lib/utils";
 
-interface CheckboxGroupFieldProps<
-  TOption extends SelectOptionTypes = SelectOptionTypes,
-> extends CommonFieldProps {
+interface CheckboxGroupFieldProps<TOption extends SelectOptionTypes = SelectOptionTypes>
+  extends CommonFieldProps {
   isLoading?: boolean;
   options: TOption[];
   extendOnchange?: (data?: TOption) => void;
@@ -41,13 +34,10 @@ function CheckboxGroupField<
   hideErrorMessage,
   options,
   extendOnchange,
-}: UseControllerProps<TFieldValues, TName> &
-  CommonFieldProps &
-  CheckboxGroupFieldProps<TOption>) {
+}: UseControllerProps<TFieldValues, TName> & CommonFieldProps & CheckboxGroupFieldProps<TOption>) {
   const { control: controlContext } = useFormContext<TFieldValues, TName>();
 
-  const safeArray = (val: PathValue<TFieldValues, TName>) =>
-    Array.isArray(val) ? val : [];
+  const safeArray = (val: PathValue<TFieldValues, TName>) => (Array.isArray(val) ? val : []);
 
   return (
     <FormField
@@ -58,10 +48,7 @@ function CheckboxGroupField<
           <FormItem className={formItemClassName}>
             {label && (
               <FormLabel className={labelClassName}>
-                {label}{" "}
-                {hasAsterisk && (
-                  <span className="ml-1 text-semantics-red-500">*</span>
-                )}
+                {label} {hasAsterisk && <span className="ml-1 text-semantics-red-500">*</span>}
               </FormLabel>
             )}
             <div className="flex flex-col space-y-3">
@@ -109,12 +96,7 @@ function CheckboxGroupField<
               })}
             </div>
             {!hideErrorMessage && fieldState.error && (
-              <FormMessage
-                className={cn(
-                  "text-sm text-semantics-red-500",
-                  errorMessageClassName,
-                )}
-              >
+              <FormMessage className={cn("text-sm text-semantics-red-500", errorMessageClassName)}>
                 {fieldState.error.message}
               </FormMessage>
             )}

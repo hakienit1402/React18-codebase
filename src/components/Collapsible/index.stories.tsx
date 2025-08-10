@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
+
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from ".";
 
 const meta: Meta<typeof Collapsible> = {

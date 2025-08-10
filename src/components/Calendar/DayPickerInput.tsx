@@ -85,9 +85,7 @@ export function DayPickerInput<
         const selected: Date | undefined = computeSelected(field.value);
         const displayValue = computeDisplayValue(selected);
 
-        const handleSingleSelect: SelectSingleEventHandler = (
-          date: Date | undefined,
-        ) => {
+        const handleSingleSelect: SelectSingleEventHandler = (date: Date | undefined) => {
           if (!date) return;
           field.onChange(format(date, dateFormat));
           extendOnChange?.(date);
@@ -112,10 +110,7 @@ export function DayPickerInput<
                       "h-10 text-base": size === "medium",
                       "h-12 text-lg": size === "large",
                     })}
-                    inputClassName={cn(
-                      "disabled:text-neutral-light-300",
-                      inputClassName,
-                    )}
+                    inputClassName={cn("disabled:text-neutral-light-300", inputClassName)}
                     placeholder={placeholder}
                     readOnly
                     value={displayValue}
@@ -148,16 +143,10 @@ export function DayPickerInput<
                 />
               </PopoverContent>
             </Popover>
-            {description && !fieldState.error && (
-              <FormDescription>{description}</FormDescription>
-            )}
-            {!hideErrorMessage && (
-              <FormMessage className={errorMessageClassName} />
-            )}
+            {description && !fieldState.error && <FormDescription>{description}</FormDescription>}
+            {!hideErrorMessage && <FormMessage className={errorMessageClassName} />}
             {warningMessage && !fieldState.error && (
-              <FormWarning className={warningMessageClassName}>
-                {warningMessage}
-              </FormWarning>
+              <FormWarning className={warningMessageClassName}>{warningMessage}</FormWarning>
             )}
           </FormItem>
         );

@@ -23,8 +23,7 @@ const ErrorPageWrapper = ({ errorType = "500" }: ErrorPageWrapperProps) => {
     404: {
       title: "Sorry, this page is not found",
       icon: <Icon404Animated />,
-      description:
-        "We couldn’t find the page you are looking for, try going back and try again.",
+      description: "We couldn’t find the page you are looking for, try going back and try again.",
       buttonText: "Go Back",
       action: () => {
         if (location?.state?.hasAccess === false) navigate(ROUTES_PATH.ROOT);
@@ -34,8 +33,7 @@ const ErrorPageWrapper = ({ errorType = "500" }: ErrorPageWrapperProps) => {
     401: {
       title: "Sorry, this page is unauthorized",
       icon: <Icon401Animated />,
-      description:
-        "We couldn’t find the page you are looking for, try going back and try again.",
+      description: "We couldn’t find the page you are looking for, try going back and try again.",
       buttonText: "Go back to Log in",
       action: async () => {
         authStore.resetAuthStore();
@@ -45,8 +43,7 @@ const ErrorPageWrapper = ({ errorType = "500" }: ErrorPageWrapperProps) => {
     500: {
       title: "Something went wrong",
       icon: <Icon500Animated />,
-      description:
-        "We couldn’t find the page you are looking for, try going back and try again.",
+      description: "We couldn’t find the page you are looking for, try going back and try again.",
       buttonText: "Go Back",
       action: () => {
         navigate(-1);
@@ -55,8 +52,7 @@ const ErrorPageWrapper = ({ errorType = "500" }: ErrorPageWrapperProps) => {
     MAINTAIN: {
       title: "We are currently undergoing scheduled maintenance",
       icon: <IconMaintainAnimated />,
-      description:
-        "We apologise for any inconvenience caused during this time.",
+      description: "We apologise for any inconvenience caused during this time.",
       buttonText: "",
       action: () => {},
     },

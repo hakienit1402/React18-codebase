@@ -1,9 +1,4 @@
-import {
-  FieldPath,
-  FieldValues,
-  UseControllerProps,
-  useFormContext,
-} from "react-hook-form";
+import { FieldPath, FieldValues, UseControllerProps, useFormContext } from "react-hook-form";
 
 import { CommonFieldProps } from "./form.type";
 
@@ -61,10 +56,7 @@ function SegmentedField<
         <FormItem className={formItemClassName}>
           {label && (
             <FormLabel className={labelClassName}>
-              {label}{" "}
-              {hasAsterisk && (
-                <span className="ml-1 text-semantics-red-500">*</span>
-              )}{" "}
+              {label} {hasAsterisk && <span className="ml-1 text-semantics-red-500">*</span>}{" "}
             </FormLabel>
           )}
           <div className={cn("relative flex items-center", {})}>
@@ -88,8 +80,7 @@ function SegmentedField<
                           "text-neutral-light-300 hover:border-neutral-light-300":
                             !isActiveItem && !isDisabled,
                           "rounded-bl-md rounded-tl-md": index === 0,
-                          "rounded-br-md rounded-tr-md":
-                            index === options.length - 1,
+                          "rounded-br-md rounded-tr-md": index === options.length - 1,
                           "cursor-not-allowed bg-neutral-dark-200": isDisabled,
                           "bg-neutral-dark-100": isDisabled && isActiveItem,
                         },
@@ -115,12 +106,8 @@ function SegmentedField<
               </div>
             </FormControl>
           </div>
-          {description && !fieldState.error && (
-            <FormDescription>{description}</FormDescription>
-          )}
-          {!hideErrorMessage && (
-            <FormMessage className={errorMessageClassName} />
-          )}
+          {description && !fieldState.error && <FormDescription>{description}</FormDescription>}
+          {!hideErrorMessage && <FormMessage className={errorMessageClassName} />}
         </FormItem>
       )}
     />

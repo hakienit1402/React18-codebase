@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import FileAttachmentField from "./FileAttachmentField";
+
 import { MAX_SIZE_IN_BYTES } from "@/components/FileAttachment";
 
 type FormValues = {

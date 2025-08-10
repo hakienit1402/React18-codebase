@@ -5,19 +5,14 @@ import { format, formatDistanceToNowStrict, isValid, parse } from "date-fns";
  */
 export const getTodayUTC = (): Date => {
   const now = new Date();
-  return new Date(
-    Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()),
-  );
+  return new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
 };
 
 /**
  * Format a date with a dynamic format string, defaulting to "dd-MMM-yyyy".
  * Always returns result in English.
  */
-export const formatDateUTC = (
-  date: Date,
-  formatStr: string = "dd-MMM-yyyy",
-): string => {
+export const formatDateUTC = (date: Date, formatStr: string = "dd-MMM-yyyy"): string => {
   return format(date, formatStr);
 };
 
@@ -25,9 +20,7 @@ export const formatDateUTC = (
  * Convert a local date to a UTC date at 00:00:00 UTC.
  */
 export const toUTCDateOnly = (date: Date): Date => {
-  return new Date(
-    Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()),
-  );
+  return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
 };
 
 /**
@@ -56,12 +49,7 @@ export const formatToISOMidPrecision = (date: Date): string => {
  * Format a date with a dynamic format string, defaulting to "dd-MMM-yyyy".
  * Always returns result in English.
  */
-type DateFormat =
-  | "dd/MM/yyyy"
-  | "yyyy-MM-dd"
-  | "dd-MM-yyyy"
-  | "yyyy/MM/dd"
-  | "dd-MMM-yyyy";
+type DateFormat = "dd/MM/yyyy" | "yyyy-MM-dd" | "dd-MM-yyyy" | "yyyy/MM/dd" | "dd-MMM-yyyy";
 
 /** Default date format for UI pickers (e.g., 25-Dec-2025) */
 export const DEFAULT_PICKER_DATE_FORMAT = "dd-MMM-yyyy";
@@ -78,11 +66,7 @@ export const BE_API_PICKER_DATE_FORMAT = "yyyy-MM-dd";
  */
 function isValidDate(day: number, month: number, year: number): boolean {
   const date = new Date(year, month - 1, day);
-  return (
-    date.getFullYear() === year &&
-    date.getMonth() === month - 1 &&
-    date.getDate() === day
-  );
+  return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
 }
 /**
  * Parses a date string based on a specified format and returns a Date object.
@@ -173,16 +157,10 @@ function formatDate(date: Date, format: DateFormat): string {
       "Dec",
     ];
     const MMM = monthNames[date.getMonth()];
-    return format
-      .replace("dd", dd)
-      .replace("MMM", MMM)
-      .replace("yyyy", String(yyyy));
+    return format.replace("dd", dd).replace("MMM", MMM).replace("yyyy", String(yyyy));
   } else {
     // Handle numeric month format (MM)
-    return format
-      .replace("dd", dd)
-      .replace("MM", MM)
-      .replace("yyyy", String(yyyy));
+    return format.replace("dd", dd).replace("MM", MM).replace("yyyy", String(yyyy));
   }
 }
 /**
@@ -345,33 +323,13 @@ export function convertDateFormatLegacy(
  * Returns start of day in UTC for a given date.
  */
 export const startOfDayUTC = (date: Date): Date =>
-  new Date(
-    Date.UTC(
-      date.getUTCFullYear(),
-      date.getUTCMonth(),
-      date.getUTCDate(),
-      0,
-      0,
-      0,
-      0,
-    ),
-  );
+  new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), 0, 0, 0, 0));
 
 /**
  * Returns end of day in UTC for a given date.
  */
 export const endOfDayUTC = (date: Date): Date =>
-  new Date(
-    Date.UTC(
-      date.getUTCFullYear(),
-      date.getUTCMonth(),
-      date.getUTCDate(),
-      23,
-      59,
-      59,
-      999,
-    ),
-  );
+  new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), 23, 59, 59, 999));
 
 /**
  * Adds a number of calendar days in UTC (24h steps) to a given date.
@@ -390,10 +348,7 @@ export const isWeekendUTC = (date: Date): boolean => {
 /**
  * Adds N business days in UTC, skipping Saturdays and Sundays.
  */
-export const addBusinessDaysUTC = (
-  date: Date,
-  numBusinessDays: number,
-): Date => {
+export const addBusinessDaysUTC = (date: Date, numBusinessDays: number): Date => {
   if (numBusinessDays === 0) return new Date(date.getTime());
   const step = numBusinessDays > 0 ? 1 : -1;
   let remaining = Math.abs(numBusinessDays);

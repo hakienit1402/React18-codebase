@@ -31,8 +31,7 @@ const FileDropzone = ({
         "flex h-full min-h-32 w-full flex-auto shrink-0 flex-col items-center justify-center overflow-hidden rounded-lg border-2 border-dashed border-neutral-dark-300 p-4 transition-colors",
         {
           "border-neutral-dark-600 bg-common-surface": isDragActive,
-          "cursor-pointer hover:border-neutral-dark-500":
-            !dropzoneProps.disabled,
+          "cursor-pointer hover:border-neutral-dark-500": !dropzoneProps.disabled,
           "bg-neutral-dark-200": dropzoneProps.disabled,
         },
       )}
@@ -57,9 +56,7 @@ const FileDropzone = ({
           </Button>
         </div>
         {textObject?.description && (
-          <p className="text-xs text-neutral-light-700">
-            {textObject?.description}
-          </p>
+          <p className="text-xs text-neutral-light-700">{textObject?.description}</p>
         )}
       </div>
     </div>

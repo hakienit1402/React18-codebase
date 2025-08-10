@@ -12,10 +12,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/Popover";
 import TooltipCustom from "@/components/Tooltip/TooltipCustom";
 import { ROUTES_PATH } from "@/constants/router";
 import { useAuthStore, UserStateEnum } from "@/domains/auth/store/authStore";
-import {
-  USER_ROLE_LABELS,
-  UserRoleEnum,
-} from "@/domains/user-management/constants/user";
+import { USER_ROLE_LABELS, UserRoleEnum } from "@/domains/user-management/constants/user";
 import useNavigationItems from "@/hooks/useNavigationItems";
 import { cn } from "@/lib/utils";
 import { clearAuthToken } from "@/services/apis";
@@ -59,14 +56,9 @@ const Sidebar = React.memo(() => {
             "[&::-webkit-scrollbar]:hidden": !sidebarOpen,
           })}
         >
-          <motion.div
-            id="sidebar-navLinks"
-            className="mt-6 grid place-content-start gap-y-2"
-          >
+          <motion.div id="sidebar-navLinks" className="mt-6 grid place-content-start gap-y-2">
             {accessibleRoutes.map((item) => {
-              const isActive = item?.pathname
-                ? location?.pathname?.includes(item.pathname)
-                : false;
+              const isActive = item?.pathname ? location?.pathname?.includes(item.pathname) : false;
 
               const hasBorderTop = item?.haveTopBorder;
               return (
@@ -119,11 +111,7 @@ const SidebarOption = React.memo(
   >(({ className, item, isActive, notifs, open, ...props }, ref) => {
     const { Icon } = item;
     return (
-      <motion.div
-        key={item.key}
-        layout
-        className={cn("ml-2 grid place-content-start")}
-      >
+      <motion.div key={item.key} layout className={cn("ml-2 grid place-content-start")}>
         <TooltipCustom
           trigger={
             <NavLink
@@ -275,13 +263,9 @@ const UserFooter = React.memo(({ open }: { open: boolean }) => {
               <span className="text-sm font-normal capitalize text-neutral-light-300">
                 {currentUser?.name}
               </span>
-              <span className="text-sm text-neutral-light-600">
-                {currentUser?.email}
-              </span>
+              <span className="text-sm text-neutral-light-600">{currentUser?.email}</span>
               <span className="mt-2 max-w-[240px] text-xs font-light text-neutral-light-500">
-                {currentUser?.roles
-                  ?.map((r) => USER_ROLE_LABELS[r as UserRoleEnum])
-                  .join(", ")}
+                {currentUser?.roles?.map((r) => USER_ROLE_LABELS[r as UserRoleEnum]).join(", ")}
               </span>
             </motion.div>
           </div>
@@ -291,9 +275,7 @@ const UserFooter = React.memo(({ open }: { open: boolean }) => {
             className="flex h-11 w-full cursor-pointer items-center gap-2 rounded-b-md border border-t-0 border-outline bg-common-surfaceOverlay px-4 py-[13px] hover:bg-common-outline/95"
           >
             <LogOutIcon className="text-neutral-light-600" />
-            <span className="leading-tight text-neutral-light-300">
-              Log out
-            </span>
+            <span className="leading-tight text-neutral-light-300">Log out</span>
           </div>
         </div>
       </TooltipCustom>
@@ -322,9 +304,7 @@ const UserFooter = React.memo(({ open }: { open: boolean }) => {
               >
                 <div className="gap-2.5 rounded-md bg-common-background px-4 py-2">
                   <span className="max-w-[184px] text-xs leading text-neutral-light-600">
-                    {currentUser?.roles
-                      ?.map((r) => USER_ROLE_LABELS[r as UserRoleEnum])
-                      .join(", ")}
+                    {currentUser?.roles?.map((r) => USER_ROLE_LABELS[r as UserRoleEnum]).join(", ")}
                   </span>
                 </div>
               </TooltipCustom>
@@ -335,11 +315,7 @@ const UserFooter = React.memo(({ open }: { open: boolean }) => {
       {open && (
         <Popover>
           <PopoverTrigger asChild>
-            <Button
-              className="mr-0 h-[24px] w-[24px]"
-              size={"sm"}
-              variant="tertiary"
-            >
+            <Button className="mr-0 h-[24px] w-[24px]" size={"sm"} variant="tertiary">
               <EllipsisVertical className="text-primary-500" />
             </Button>
           </PopoverTrigger>
@@ -350,10 +326,7 @@ const UserFooter = React.memo(({ open }: { open: boolean }) => {
             <div className="flex items-start gap-2 rounded-t-md border border-outline bg-common-surface px-4 py-3">
               <div className="grid size-9 min-w-9 place-content-center rounded-full bg-gray-800">
                 <span className="text-sm text-gray-400">
-                  {getFirstNCharacters(
-                    currentUser?.name || "",
-                    1,
-                  )?.toUpperCase()}
+                  {getFirstNCharacters(currentUser?.name || "", 1)?.toUpperCase()}
                 </span>
               </div>
               <motion.div
@@ -365,13 +338,9 @@ const UserFooter = React.memo(({ open }: { open: boolean }) => {
                 <span className="text-sm font-normal capitalize text-neutral-light-300">
                   {currentUser?.name}
                 </span>
-                <span className="text-sm text-neutral-light-600">
-                  {currentUser?.email}
-                </span>
+                <span className="text-sm text-neutral-light-600">{currentUser?.email}</span>
                 <span className="mt-2 max-w-[240px] text-xs font-light text-neutral-light-500">
-                  {currentUser?.roles
-                    ?.map((r) => USER_ROLE_LABELS[r as UserRoleEnum])
-                    .join(", ")}
+                  {currentUser?.roles?.map((r) => USER_ROLE_LABELS[r as UserRoleEnum]).join(", ")}
                 </span>
               </motion.div>
             </div>
@@ -381,9 +350,7 @@ const UserFooter = React.memo(({ open }: { open: boolean }) => {
               className="flex h-11 w-full cursor-pointer items-center gap-2 rounded-b-md border border-t-0 border-outline bg-common-surfaceOverlay px-4 py-[13px] hover:bg-common-outline/45"
             >
               <LogOutIcon className="text-neutral-light-600" />
-              <span className="leading-tight text-neutral-light-300">
-                Log out
-              </span>
+              <span className="leading-tight text-neutral-light-300">Log out</span>
             </div>
           </PopoverContent>
         </Popover>

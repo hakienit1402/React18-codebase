@@ -1,22 +1,23 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import type { Meta, StoryObj } from "@storybook/react";
 import { userEvent, within, waitFor, expect } from "@storybook/test";
 import { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 
-import TextField from "./TextField";
-import TextareaField from "./TextareaField";
-import NumberField from "./NumberField";
-import SelectField from "./SelectField";
 import AsyncCreateableSelectField from "./AsyncSelectField";
-import CheckboxGroupField from "./CheckboxGroupField";
 import BooleanCheckboxGroupField from "./BooleanCheckboxGroupField";
+import CheckboxGroupField from "./CheckboxGroupField";
+import NumberField from "./NumberField";
 import SegmentedField from "./SegmentedField";
-import type { OptionType as SelectOption } from "@/components/SelectInput";
-import type { OptionType as AsyncSelectOption } from "@/components/SelectInput/AsyncCreateableSelectInput";
-import type { SelectOptionTypes } from "@/components/SelectInput";
+import SelectField from "./SelectField";
+import TextareaField from "./TextareaField";
+import TextField from "./TextField";
+
 import { Button } from "@/components/Button";
+import type { OptionType as SelectOption } from "@/components/SelectInput";
+import type { SelectOptionTypes } from "@/components/SelectInput";
+import type { OptionType as AsyncSelectOption } from "@/components/SelectInput/AsyncCreateableSelectInput";
 
 // Schema
 const optionSchema = z.object({ label: z.string(), value: z.string() });

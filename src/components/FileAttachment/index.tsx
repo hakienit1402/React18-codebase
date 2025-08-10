@@ -18,10 +18,7 @@ interface FileAttachmentProps {
   disabled?: boolean;
   maxSizeInBytes?: number;
   allowType?: Accept | null;
-  onChange?: (
-    file: File | undefined,
-    status?: { isRejected?: boolean; errors?: string[] },
-  ) => void;
+  onChange?: (file: File | undefined, status?: { isRejected?: boolean; errors?: string[] }) => void;
   value?: File | undefined;
   errorField?: FieldError | undefined;
   clearErrors?: () => void;
@@ -29,16 +26,7 @@ interface FileAttachmentProps {
 
 const FileAttachment = forwardRef<HTMLDivElement, FileAttachmentProps>(
   (
-    {
-      textObject,
-      disabled,
-      maxSizeInBytes,
-      allowType,
-      onChange,
-      value,
-      errorField,
-      clearErrors,
-    },
+    { textObject, disabled, maxSizeInBytes, allowType, onChange, value, errorField, clearErrors },
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
     const controllerRef = useRef(new AbortController());

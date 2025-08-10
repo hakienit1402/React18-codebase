@@ -55,10 +55,7 @@ export const DialogWrapper = ({
         <DialogHeader className="border-b border-neutral-dark-300 p-4">
           {title && (
             <DialogTitle
-              className={cn(
-                "text-base font-semibold text-neutral-light-100",
-                titleClassName,
-              )}
+              className={cn("text-base font-semibold text-neutral-light-100", titleClassName)}
             >
               {title}
             </DialogTitle>
@@ -66,26 +63,16 @@ export const DialogWrapper = ({
         </DialogHeader>
         {children && children}
 
-        <DialogFooter
-          className={cn("mt-auto flex justify-end gap-2", classNameButtons)}
-        >
+        <DialogFooter className={cn("mt-auto flex justify-end gap-2", classNameButtons)}>
           {!buttonsComponent && (
             <>
               {secondaryCTA.visible && (
-                <Button
-                  variant="outline"
-                  onClick={secondaryCTA.onClick}
-                  {...secondaryCTA}
-                >
+                <Button variant="outline" onClick={secondaryCTA.onClick} {...secondaryCTA}>
                   {secondaryCTA.children}
                 </Button>
               )}
               {primaryCTA.visible && (
-                <Button
-                  variant="primary"
-                  onClick={primaryCTA.onClick}
-                  {...primaryCTA}
-                >
+                <Button variant="primary" onClick={primaryCTA.onClick} {...primaryCTA}>
                   {primaryCTA.children}
                 </Button>
               )}

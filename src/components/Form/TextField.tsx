@@ -1,12 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Eye, EyeClosed, Loader2Icon, LockIcon } from "lucide-react";
 import { ComponentProps, useState } from "react";
-import {
-  FieldPath,
-  FieldValues,
-  UseControllerProps,
-  useFormContext,
-} from "react-hook-form";
+import { FieldPath, FieldValues, UseControllerProps, useFormContext } from "react-hook-form";
 
 import { CommonFieldProps } from "./form.type";
 
@@ -45,9 +40,7 @@ function TextField<
   isLoading,
   description,
   ...props
-}: UseControllerProps<TFieldValues, TName> &
-  TextFieldProps &
-  ComponentProps<typeof Input>) {
+}: UseControllerProps<TFieldValues, TName> & TextFieldProps & ComponentProps<typeof Input>) {
   const [showPassword, setShowPassword] = useState(false);
   const { control: controlContext } = useFormContext<TFieldValues, TName>();
   const onBlurWorkaround = (event: React.FocusEvent<HTMLInputElement>) => {
@@ -77,10 +70,7 @@ function TextField<
           <FormItem className={formItemClassName}>
             {label && (
               <FormLabel className={labelClassName}>
-                {label}{" "}
-                {hasAsterisk && (
-                  <span className="ml-1 text-semantics-red-500">*</span>
-                )}
+                {label} {hasAsterisk && <span className="ml-1 text-semantics-red-500">*</span>}
               </FormLabel>
             )}
 
@@ -90,11 +80,7 @@ function TextField<
                   {...props}
                   {...field}
                   type={
-                    props.type === "password"
-                      ? showPassword
-                        ? "text"
-                        : "password"
-                      : props.type
+                    props.type === "password" ? (showPassword ? "text" : "password") : props.type
                   }
                   onBlur={(e) => {
                     onBlurWorkaround(e);
@@ -154,12 +140,8 @@ function TextField<
                 />
               </FormControl>
             </div>
-            {description && !fieldState.error && (
-              <FormDescription>{description}</FormDescription>
-            )}
-            {!hideErrorMessage && (
-              <FormMessage className={errorMessageClassName} />
-            )}
+            {description && !fieldState.error && <FormDescription>{description}</FormDescription>}
+            {!hideErrorMessage && <FormMessage className={errorMessageClassName} />}
           </FormItem>
         );
       }}

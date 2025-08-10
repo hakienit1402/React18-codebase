@@ -23,8 +23,7 @@ const ErrorFallback = () => {
               Something went wrong
             </motion.p>
             <motion.p className="text-normal text-sm leading-[17.5px] text-neutral-light-500">
-              We couldn’t find the page you are looking for, try going back and
-              try again.
+              We couldn’t find the page you are looking for, try going back and try again.
             </motion.p>
           </motion.div>
         </div>

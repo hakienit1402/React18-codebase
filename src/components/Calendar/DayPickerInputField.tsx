@@ -41,27 +41,25 @@ type FormDatePickerProps<
   inputClassName?: string;
 };
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const CustomDateInput = React.forwardRef<HTMLInputElement, any>(
-  (props, ref) => {
-    const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-      // Select all text when input receives focus
-      e.target.select();
-      // Call the original onFocus handler if it exists
-      if (props.onFocus) {
-        props.onFocus(e);
-      }
-    };
+const CustomDateInput = React.forwardRef<HTMLInputElement, any>((props, ref) => {
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    // Select all text when input receives focus
+    e.target.select();
+    // Call the original onFocus handler if it exists
+    if (props.onFocus) {
+      props.onFocus(e);
+    }
+  };
 
-    return (
-      <Input
-        {...props}
-        ref={ref}
-        inputClassName={cn("!pl-3 !pr-10 !py-2", props.inputClassName)}
-        onFocus={handleFocus}
-      />
-    );
-  },
-);
+  return (
+    <Input
+      {...props}
+      ref={ref}
+      inputClassName={cn("!pl-3 !pr-10 !py-2", props.inputClassName)}
+      onFocus={handleFocus}
+    />
+  );
+});
 CustomDateInput.displayName = "CustomDateInput";
 export function DayPickerInputField<
   TFieldValues extends FieldValues,
@@ -193,8 +191,7 @@ export function DayPickerInputField<
                   debouncedClearError();
                 }}
                 onChangeRaw={(event) => {
-                  const rawInput =
-                    (event?.target as HTMLInputElement)?.value ?? "";
+                  const rawInput = (event?.target as HTMLInputElement)?.value ?? "";
 
                   // Open calendar when user starts typing
                   if (rawInput.length > 0) {
@@ -222,9 +219,7 @@ export function DayPickerInputField<
                 isClearable
                 maxDate={maxDate}
                 shouldCloseOnSelect={true}
-                customInput={
-                  <CustomDateInput inputClassName={inputClassName} />
-                }
+                customInput={<CustomDateInput inputClassName={inputClassName} />}
                 className={cn(
                   "",
                   {
@@ -243,14 +238,10 @@ export function DayPickerInputField<
                 portalId="root-portal"
               />
             </FormControl>
-            {description && !fieldState.error && (
-              <FormDescription>{description}</FormDescription>
-            )}
+            {description && !fieldState.error && <FormDescription>{description}</FormDescription>}
             <FormMessage className={errorMessageClassName} />
             {warningMessage && !fieldState.error && (
-              <FormWarning className={warningMessageClassName}>
-                {warningMessage}
-              </FormWarning>
+              <FormWarning className={warningMessageClassName}>{warningMessage}</FormWarning>
             )}
           </FormItem>
         );

@@ -9,12 +9,7 @@ interface FileUploadedProps {
   className?: string;
   isError?: boolean;
 }
-const FileUploaded = ({
-  file,
-  className,
-  isError = false,
-  onRemove,
-}: FileUploadedProps) => {
+const FileUploaded = ({ file, className, isError = false, onRemove }: FileUploadedProps) => {
   if (!file) return null;
 
   return (
@@ -26,12 +21,8 @@ const FileUploaded = ({
     >
       <div className="flex items-center justify-between gap-1">
         <div className="flex items-center gap-1">
-          <FileIcon
-            className={cn("h-5 w-5", { "text-semantics-red-500": isError })}
-          />
-          <p className={cn({ "text-semantics-red-500": isError })}>
-            {file.name}
-          </p>
+          <FileIcon className={cn("h-5 w-5", { "text-semantics-red-500": isError })} />
+          <p className={cn({ "text-semantics-red-500": isError })}>{file.name}</p>
         </div>
         <div className="flex items-center gap-1">
           {onRemove && (

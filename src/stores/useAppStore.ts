@@ -21,8 +21,7 @@ export const useAppStore = create<WithPersist<AppState>>()(
         setHasHydrated: (state: boolean) => set({ _hasHydrated: state }),
         theme: "light",
         setTheme: (theme) => set({ theme }),
-        resetAppStore: () =>
-          set({ sidebarOpen: false, theme: "light", _hasHydrated: false }),
+        resetAppStore: () => set({ sidebarOpen: false, theme: "light", _hasHydrated: false }),
       }),
       {
         name: "app-storage",

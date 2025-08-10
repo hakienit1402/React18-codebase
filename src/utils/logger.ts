@@ -83,11 +83,7 @@ class Logger {
     }
   }
 
-  public error(
-    message: string,
-    error?: Error | unknown,
-    context?: string,
-  ): void {
+  public error(message: string, error?: Error | unknown, context?: string): void {
     this.log({
       level: LogLevel.ERROR,
       message,
@@ -141,11 +137,8 @@ class Logger {
 export const logger = new Logger();
 
 // Export convenience functions
-export const logError = (
-  message: string,
-  error?: Error | unknown,
-  context?: string,
-) => logger.error(message, error, context);
+export const logError = (message: string, error?: Error | unknown, context?: string) =>
+  logger.error(message, error, context);
 
 export const logWarn = (message: string, data?: unknown, context?: string) =>
   logger.warn(message, data, context);

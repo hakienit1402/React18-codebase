@@ -50,9 +50,7 @@ export type OptionType = {
   [key: string]: unknown;
 };
 
-const AsyncCreateAbleSelectInput = React.forwardRef(
-  AsyncCreateAbleSelectComponentInner,
-) as <
+const AsyncCreateAbleSelectInput = React.forwardRef(AsyncCreateAbleSelectComponentInner) as <
   Option = OptionType,
   IsMulti extends boolean = false,
   Group extends GroupBase<Option> = GroupBase<Option>,
@@ -63,9 +61,7 @@ const AsyncCreateAbleSelectInput = React.forwardRef(
     ) => (inputValue: string, callback: (options: Option[]) => void) => void;
   }) &
     SelectComponentCustomProps & {
-      ref?: React.ForwardedRef<
-        React.ElementRef<typeof Select<Option, IsMulti, Group>>
-      >;
+      ref?: React.ForwardedRef<React.ElementRef<typeof Select<Option, IsMulti, Group>>>;
     },
 ) => ReturnType<typeof AsyncCreateAbleSelectComponentInner>;
 
@@ -96,9 +92,7 @@ function AsyncCreateAbleSelectComponentInner<
     ) => (inputValue: string, callback: (options: Option[]) => void) => void;
   }) &
     SelectComponentCustomProps,
-  ref: React.ForwardedRef<
-    React.ElementRef<typeof Select<Option, IsMulti, Group>>
-  >,
+  ref: React.ForwardedRef<React.ElementRef<typeof Select<Option, IsMulti, Group>>>,
 ) {
   const [inputValue, setInputValue] = useState("");
   const [menuMaxHeight, setMenuMaxHeight] = useState<number | null>(null);
@@ -140,8 +134,7 @@ function AsyncCreateAbleSelectComponentInner<
   const isValidNewOption = (value: string) => {
     const sanitizedValue = value.replace(/[^a-zA-Z0-9\s]/g, "");
     const isWithinLength =
-      sanitizedValue.length >= minInputLength &&
-      sanitizedValue.length <= maxInputLength;
+      sanitizedValue.length >= minInputLength && sanitizedValue.length <= maxInputLength;
     return sanitizedValue === value && isWithinLength;
   };
   return (
@@ -173,9 +166,7 @@ function AsyncCreateAbleSelectComponentInner<
           ClearIndicator: CustomComponents.ClearIndicator,
           IndicatorSeparator: () => null,
           LoadingIndicator: () => null,
-          MultiValueRemove: isDisabled
-            ? () => null
-            : CustomComponents.MultiValueRemove,
+          MultiValueRemove: isDisabled ? () => null : CustomComponents.MultiValueRemove,
           SingleValue: CustomComponents.SingleValue,
           MultiValue: ({ ...props }) => (
             <CustomComponents.MultiValue {...props}>
@@ -198,8 +189,7 @@ function AsyncCreateAbleSelectComponentInner<
                 [CustomComponents.controlStyles.error]: !!props.error,
 
                 [CustomComponents.controlStyles.multi]: isMulti,
-                [CustomComponents.controlStyles.multiSmall]:
-                  isMulti && size === "small",
+                [CustomComponents.controlStyles.multiSmall]: isMulti && size === "small",
               },
               "px-2 py-1",
             ),
@@ -210,8 +200,7 @@ function AsyncCreateAbleSelectComponentInner<
             }),
           placeholder: () => CustomComponents.placeholderStyles,
           input: () => CustomComponents.selectInputStyles,
-          menu: () =>
-            cn(CustomComponents.menuStyles, { "mt-5": hasDescription }),
+          menu: () => cn(CustomComponents.menuStyles, { "mt-5": hasDescription }),
           valueContainer: () => cn(CustomComponents.valueContainerStyles, {}),
           singleValue: () => CustomComponents.singleValueStyles,
           multiValue: () =>
@@ -228,15 +217,9 @@ function AsyncCreateAbleSelectComponentInner<
           noOptionsMessage: () => CustomComponents.noOptionsMessageStyles,
           loadingMessage: () => "text-neutral-light-300 p-4 text-center",
         }}
-        onChange={(
-          item: OnChangeValue<Option, IsMulti>,
-          action: ActionMeta<Option>,
-        ) => {
+        onChange={(item: OnChangeValue<Option, IsMulti>, action: ActionMeta<Option>) => {
           props.onChange?.(item, action);
-          extendOnchange?.(
-            item as SelectOptionTypes | SelectOptionTypes[],
-            action,
-          );
+          extendOnchange?.(item as SelectOptionTypes | SelectOptionTypes[], action);
           setInputValue("");
         }}
         styles={{

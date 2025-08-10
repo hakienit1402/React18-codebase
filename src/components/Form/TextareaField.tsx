@@ -1,11 +1,6 @@
 import { Loader2Icon, LockIcon } from "lucide-react";
 import { ComponentProps } from "react";
-import {
-  FieldPath,
-  FieldValues,
-  UseControllerProps,
-  useFormContext,
-} from "react-hook-form";
+import { FieldPath, FieldValues, UseControllerProps, useFormContext } from "react-hook-form";
 
 import { Textarea } from "../Textarea";
 import { CommonFieldProps } from "./form.type";
@@ -43,9 +38,7 @@ function TextareaField<
   name,
   description,
   ...props
-}: UseControllerProps<TFieldValues, TName> &
-  TextareaFieldProps &
-  ComponentProps<typeof Textarea>) {
+}: UseControllerProps<TFieldValues, TName> & TextareaFieldProps & ComponentProps<typeof Textarea>) {
   const { control: controlContext } = useFormContext<TFieldValues, TName>();
   const onBlurWorkaround = (event: React.FocusEvent<HTMLTextAreaElement>) => {
     const element = event.relatedTarget;
@@ -66,17 +59,12 @@ function TextareaField<
       name={name}
       render={({ field, fieldState }) => {
         const isHasEndAdornment =
-          props.endAdornment ||
-          isLoading ||
-          (hasIconBlock && props.disabled && !isLoading);
+          props.endAdornment || isLoading || (hasIconBlock && props.disabled && !isLoading);
         return (
           <FormItem className={formItemClassName}>
             {label && (
               <FormLabel className={labelClassName}>
-                {label}{" "}
-                {hasAsterisk && (
-                  <span className="ml-1 text-semantics-red-500">*</span>
-                )}
+                {label} {hasAsterisk && <span className="ml-1 text-semantics-red-500">*</span>}
               </FormLabel>
             )}
             <div className={cn("relative flex items-center", {})}>
@@ -108,12 +96,8 @@ function TextareaField<
                 />
               </FormControl>
             </div>
-            {description && !fieldState.error && (
-              <FormDescription>{description}</FormDescription>
-            )}
-            {!hideErrorMessage && (
-              <FormMessage className={errorMessageClassName} />
-            )}
+            {description && !fieldState.error && <FormDescription>{description}</FormDescription>}
+            {!hideErrorMessage && <FormMessage className={errorMessageClassName} />}
           </FormItem>
         );
       }}

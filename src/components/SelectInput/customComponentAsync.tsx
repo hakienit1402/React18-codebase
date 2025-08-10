@@ -35,10 +35,8 @@ export const selectInputStyles = "ml-1 text-neutral-light-300 cursor-text";
 export const valueContainerStyles =
   "text-neutral-light-300 text-sm gap-1 flex items-center flex-wrap py-1";
 export const singleValueStyles = "ml-1 [&>svg]:shrink-0";
-export const multiValueStyles =
-  "bg-neutral-dark-400 rounded  items-center p-1 pl-2 pr-1 gap-1.5";
-export const multiValueNoRemoveStyles =
-  "bg-neutral-dark-400 rounded items-center p-1 pr-2 gap-1.5";
+export const multiValueStyles = "bg-neutral-dark-400 rounded  items-center p-1 pl-2 pr-1 gap-1.5";
+export const multiValueNoRemoveStyles = "bg-neutral-dark-400 rounded items-center p-1 pr-2 gap-1.5";
 export const multiValueLabelStyles = "leading-5 text-xs";
 export const multiValueRemoveStyles =
   "bg-transparent text-neutral-light-500 hover:text-semantics-red-500 rounded-md w-4 h-4";
@@ -46,8 +44,7 @@ export const indicatorsContainerStyles = "gap-1";
 export const clearIndicatorStyles =
   "bg-transparent text-neutral-light-500 rounded-md cursor-pointer  hover:text-semantics-red-500";
 export const indicatorSeparatorStyles = "bg-transparent";
-export const dropdownIndicatorStyles =
-  "hover:text-neutral-light-400 text-neutral-light-500";
+export const dropdownIndicatorStyles = "hover:text-neutral-light-400 text-neutral-light-500";
 export const loadingIndicatorStyles = "text-neutral-light-300 bg-background";
 
 export const menuStyles =
@@ -58,8 +55,7 @@ export const optionsStyle = {
     "!cursor-not-allowed bg-neutral-dark-200 hover:bg-neutral-dark-200 text-neutral-light-800",
   isSelected: "bg-common-surfaceOverlay",
 };
-export const groupHeadingStyles =
-  "ml-3 mt-2 mb-1 text-neutral-light-500 text-sm ";
+export const groupHeadingStyles = "ml-3 mt-2 mb-1 text-neutral-light-500 text-sm ";
 export const noOptionsMessageStyles =
   "min-h-20 flex items-center p-3 justify-center text-neutral-light-800";
 
@@ -81,11 +77,7 @@ export const DropdownIndicator = <
     }
   }, [props.isDisabled, props.selectProps.isLoading]);
 
-  return (
-    <components.DropdownIndicator {...props}>
-      {icon}
-    </components.DropdownIndicator>
-  );
+  return <components.DropdownIndicator {...props}>{icon}</components.DropdownIndicator>;
 };
 
 export const ClearIndicator = <
@@ -100,22 +92,14 @@ export const ClearIndicator = <
   </components.ClearIndicator>
 );
 
-export const SingleValue = <
-  Option,
-  IsMulti extends boolean,
-  Group extends GroupBase<Option>,
->({
+export const SingleValue = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>({
   className,
   ...props
 }: SingleValueProps<Option, IsMulti, Group>) => {
   return (
     <components.SingleValue
       {...props}
-      className={cn(
-        props.getStyles("singleValue", props),
-        className,
-        "flex items-center gap-2",
-      )}
+      className={cn(props.getStyles("singleValue", props), className, "flex items-center gap-2")}
     >
       {(props?.data as OptionType)?.icon &&
         (typeof (props?.data as OptionType)?.icon === "string" ? (
@@ -134,11 +118,7 @@ export const SingleValue = <
   );
 };
 
-export const MultiValue = <
-  Option,
-  IsMulti extends boolean,
-  Group extends GroupBase<Option>,
->({
+export const MultiValue = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>({
   className,
   ...props
 }: MultiValueProps<Option, IsMulti, Group>) => {
@@ -177,11 +157,7 @@ export const MultiValueRemove = (props: MultiValueRemoveProps) => (
 );
 
 const SOME_THRESHOLD = 20;
-export const OptionWithTick = <
-  Option,
-  IsMulti extends boolean,
-  Group extends GroupBase<Option>,
->({
+export const OptionWithTick = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>({
   className,
   ...props
 }: OptionProps<Option, IsMulti, Group>) => {
@@ -313,9 +289,7 @@ export const ValueContainerCustom = <
               },
             )}
           >
-            {getValue().length > 0
-              ? `Selected • ${getValue().length} `
-              : "Select"}
+            {getValue().length > 0 ? `Selected • ${getValue().length} ` : "Select"}
           </span>
         </p>
       );

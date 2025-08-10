@@ -8,8 +8,7 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "border-transparent bg-neutral-dark-300 text-neutral-light-400 shadow",
+        default: "border-transparent bg-neutral-dark-300 text-neutral-light-400 shadow",
         warning: "font-semibold text-semantics-yellow-500 p-0",
         success: "font-semibold text-semantics-green-500 p-0",
         info: "font-semibold text-semantics-blue p-0",
@@ -41,9 +40,7 @@ enum BADGE_VARIANTS {
 }
 
 function Badge({ className, variant, ...props }: BadgeProps) {
-  return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props} />
-  );
+  return <div className={cn(badgeVariants({ variant }), className)} {...props} />;
 }
 
 export { Badge, badgeVariants, BADGE_VARIANTS };

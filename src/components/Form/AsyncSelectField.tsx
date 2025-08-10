@@ -1,10 +1,5 @@
 import { ComponentProps } from "react";
-import {
-  FieldPath,
-  FieldValues,
-  UseControllerProps,
-  useFormContext,
-} from "react-hook-form";
+import { FieldPath, FieldValues, UseControllerProps, useFormContext } from "react-hook-form";
 
 import { CommonFieldProps } from "./form.type";
 
@@ -37,10 +32,7 @@ function AsyncCreateableSelectField<
 }: UseControllerProps<TFieldValues, TName> &
   CommonFieldProps &
   ComponentProps<typeof AsyncCreateAbleSelectInput>) {
-  const { control: controlContext, trigger } = useFormContext<
-    TFieldValues,
-    TName
-  >();
+  const { control: controlContext, trigger } = useFormContext<TFieldValues, TName>();
 
   const debouncedClearError = () => {
     setTimeout(() => {
@@ -56,16 +48,10 @@ function AsyncCreateableSelectField<
           <FormItem className={formItemClassName}>
             {label && (
               <FormLabel className={labelClassName}>
-                {label}{" "}
-                {hasAsterisk && (
-                  <span className="ml-1 text-semantics-red-500">*</span>
-                )}
+                {label} {hasAsterisk && <span className="ml-1 text-semantics-red-500">*</span>}
               </FormLabel>
             )}
-            <div
-              data-testid={props.dataTestId}
-              className={cn("relative flex items-center", {})}
-            >
+            <div data-testid={props.dataTestId} className={cn("relative flex items-center", {})}>
               <FormControl>
                 <AsyncCreateAbleSelectInput
                   {...field}
@@ -80,12 +66,8 @@ function AsyncCreateableSelectField<
                 />
               </FormControl>
             </div>
-            {description && !fieldState.error && (
-              <FormDescription>{description}</FormDescription>
-            )}
-            {!hideErrorMessage && (
-              <FormMessage className={errorMessageClassName} />
-            )}
+            {description && !fieldState.error && <FormDescription>{description}</FormDescription>}
+            {!hideErrorMessage && <FormMessage className={errorMessageClassName} />}
           </FormItem>
         );
       }}

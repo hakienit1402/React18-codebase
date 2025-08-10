@@ -24,9 +24,7 @@ interface TestWrapperProps {
 
 export const TestWrapper = ({ children, queryClient }: TestWrapperProps) => (
   <QueryClientProvider client={queryClient}>
-    <MemoryRouter
-      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
-    >
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       {children}
     </MemoryRouter>
   </QueryClientProvider>

@@ -33,13 +33,9 @@ export const SheetWrapper = ({
       <SheetDescription />
       <SheetContent className="flex h-full min-w-[489px] flex-col rounded-r-none">
         <SheetHeader className="h-[50px] border-b border-neutral-dark-300 p-4">
-          {headerTitle && (
-            <SheetTitle className="leading-5">{headerTitle}</SheetTitle>
-          )}
+          {headerTitle && <SheetTitle className="leading-5">{headerTitle}</SheetTitle>}
         </SheetHeader>
-        <div className="h-[calc(100vh-100px)] overflow-y-auto pb-8 pt-4">
-          {children}
-        </div>
+        <div className="h-[calc(100vh-100px)] overflow-y-auto pb-8 pt-4">{children}</div>
         {actionText && (
           <SheetFooter className="h-[50px] border-t border-neutral-dark-300 px-4 py-2">
             <Button

@@ -35,9 +35,7 @@ export function DateRangeInput<
   description,
 }: UseControllerProps<TFieldValues, TName> & DateRangeFieldProps) {
   const [open, setOpen] = useState(false);
-  const [pendingRange, setPendingRange] = useState<DateRange | undefined>(
-    undefined,
-  );
+  const [pendingRange, setPendingRange] = useState<DateRange | undefined>(undefined);
 
   return (
     <FormField
@@ -75,10 +73,7 @@ export function DateRangeInput<
                     className="w-full pl-3 text-left font-normal"
                     onClick={() => setOpen(true)}
                     endAdornment={
-                      <CalendarIcon
-                        onClick={() => setOpen(true)}
-                        className="h-4 w-4"
-                      />
+                      <CalendarIcon onClick={() => setOpen(true)} className="h-4 w-4" />
                     }
                   />
                 </FormControl>

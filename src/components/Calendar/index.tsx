@@ -9,12 +9,7 @@ import { cn } from "@/lib/utils";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
-function Calendar({
-  className,
-  classNames,
-  showOutsideDays = true,
-  ...props
-}: CalendarProps) {
+function Calendar({ className, classNames, showOutsideDays = true, ...props }: CalendarProps) {
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
@@ -33,8 +28,7 @@ function Calendar({
         nav_button_next: "absolute right-1",
         table: "w-full border-collapse space-y-0.5",
         head_row: "flex",
-        head_cell:
-          "text-neutral-light-300 mx-0.5 rounded-md w-8 font-medium text-[0.8rem]",
+        head_cell: "text-neutral-light-300 mx-0.5 rounded-md w-8 font-medium text-[0.8rem]",
         row: "flex w-full mt-2",
         cell: cn(
           "relative p-0 mx-0.5 text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-primary-200 [&:has([aria-selected].day-outside)]:bg-primary-200 [&:has([aria-selected].day-range-end)]:rounded-r-md",
@@ -51,12 +45,10 @@ function Calendar({
         day_selected:
           "bg-primary-100 text-primary-800 hover:bg-primary-100 hover:text-primary-800 focus:bg-primary focus:text-primary-800",
         day_today: "", // 'day-today bg-accent text-accent-foreground',
-        day_outside:
-          "day-outside aria-selected:bg-accent/50 aria-selected:text-muted-foreground ",
+        day_outside: "day-outside aria-selected:bg-accent/50 aria-selected:text-muted-foreground ",
         day_disabled:
           "text-neutral-light-100 opacity-80  aria-selected:bg-primary-100 aria-selected:text-primary-800",
-        day_range_middle:
-          "aria-selected:bg-accent aria-selected:text-accent-foreground",
+        day_range_middle: "aria-selected:bg-accent aria-selected:text-accent-foreground",
         day_hidden: "invisible",
         ...classNames,
       }}

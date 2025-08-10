@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
-import { Input } from ".";
 import { Search } from "lucide-react";
+import { useState } from "react";
+
+import { Input } from ".";
 
 const meta: Meta<typeof Input> = {
   title: "Components/Input",

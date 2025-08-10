@@ -1,12 +1,7 @@
 import { debounce } from "lodash";
 import { Loader2Icon, LockIcon } from "lucide-react";
 import { ComponentProps, useEffect, useMemo } from "react";
-import {
-  FieldPath,
-  FieldValues,
-  UseControllerProps,
-  useFormContext,
-} from "react-hook-form";
+import { FieldPath, FieldValues, UseControllerProps, useFormContext } from "react-hook-form";
 import { NumberFormatValues } from "react-number-format";
 
 import {
@@ -61,10 +56,7 @@ function NumberField<
 }: UseControllerProps<TFieldValues, TName> &
   NumberFieldProps &
   ComponentProps<typeof NumberFormat>) {
-  const { control: controlContext, trigger } = useFormContext<
-    TFieldValues,
-    TName
-  >();
+  const { control: controlContext, trigger } = useFormContext<TFieldValues, TName>();
   const onBlurWorkaround = (event: React.FocusEvent<HTMLInputElement>) => {
     const element = event.relatedTarget;
     if (
@@ -103,17 +95,12 @@ function NumberField<
       name={name}
       render={({ field, fieldState }) => {
         const isHasEndAdornment =
-          props.endAdornment ||
-          isLoading ||
-          (hasIconBlock && props.disabled && !isLoading);
+          props.endAdornment || isLoading || (hasIconBlock && props.disabled && !isLoading);
         return (
           <FormItem className={formItemClassName}>
             {label && (
               <FormLabel className={labelClassName}>
-                {label}{" "}
-                {hasAsterisk && (
-                  <span className="ml-1 text-semantics-red-500">*</span>
-                )}
+                {label} {hasAsterisk && <span className="ml-1 text-semantics-red-500">*</span>}
               </FormLabel>
             )}
             <div className={cn("relative flex items-center", {})}>
@@ -148,17 +135,11 @@ function NumberField<
               </FormControl>
             </div>
             {description && !fieldState.error && (
-              <FormDescription className={descriptionClassName}>
-                {description}
-              </FormDescription>
+              <FormDescription className={descriptionClassName}>{description}</FormDescription>
             )}
-            {!hideErrorMessage && (
-              <FormMessage className={errorMessageClassName} />
-            )}
+            {!hideErrorMessage && <FormMessage className={errorMessageClassName} />}
             {warningMessage && !fieldState.error && (
-              <FormWarning className={warningMessageClassName}>
-                {warningMessage}
-              </FormWarning>
+              <FormWarning className={warningMessageClassName}>{warningMessage}</FormWarning>
             )}
           </FormItem>
         );

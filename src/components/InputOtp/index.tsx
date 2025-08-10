@@ -54,12 +54,9 @@ const InputOTPSlot = React.forwardRef<
       {char}
       {showFakeCaret && (
         <div
-          className={cn(
-            "pointer-events-none absolute inset-0 flex items-center justify-center",
-            {
-              "right-px": !!char,
-            },
-          )}
+          className={cn("pointer-events-none absolute inset-0 flex items-center justify-center", {
+            "right-px": !!char,
+          })}
         >
           <motion.div
             className={cn("h-4 w-px bg-primary-100", {

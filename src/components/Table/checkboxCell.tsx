@@ -17,11 +17,7 @@ const checkboxCell = <TValues,>(
       const cells = rows?.map((i) => i.original);
 
       const disabledCells = cells.filter(
-        (ele) =>
-          ele &&
-          typeof ele === "object" &&
-          "approveAllowed" in ele &&
-          !ele.approveAllowed,
+        (ele) => ele && typeof ele === "object" && "approveAllowed" in ele && !ele.approveAllowed,
       );
       const isDisabled = !!disabledCells.length;
 
@@ -75,9 +71,7 @@ export const checkboxCellCustom = <TValues,>(
         onCheckedChange={(value) => {
           table.toggleAllPageRowsSelected(!!value);
           //get all rows of table
-          const itemsSelected = table
-            .getFilteredRowModel()
-            .rows.map((row) => row.original);
+          const itemsSelected = table.getFilteredRowModel().rows.map((row) => row.original);
           if (extendCheckboxChange) {
             extendCheckboxChange?.onCheckedAllChange(!!value, itemsSelected);
           }

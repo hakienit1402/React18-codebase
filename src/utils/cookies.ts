@@ -26,20 +26,13 @@ const secureAttributes: CookieAttributes = {
 // Create configured cookie instance
 const cookies = Cookies.withAttributes(defaultAttributes);
 // Type-safe cookie functions
-export const setCookie = (
-  name: string,
-  value: string,
-  options: CookieAttributes = {},
-): void => {
+export const setCookie = (name: string, value: string, options: CookieAttributes = {}): void => {
   cookies.set(name, value, options);
 };
 export const getCookie = (name: string): string | undefined => {
   return cookies.get(name);
 };
-export const removeCookie = (
-  name: string,
-  options: CookieAttributes = {},
-): void => {
+export const removeCookie = (name: string, options: CookieAttributes = {}): void => {
   cookies.remove(name, options);
 };
 

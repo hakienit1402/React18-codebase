@@ -23,16 +23,9 @@ export function NetworkModeToggle({ className }: { className?: string }) {
         <CoinsIcon className="mainnet:opacity-100 testnet:opacity-0 absolute left-0.5 top-0.5 h-4 w-4 text-mainnet-secondary transition-opacity" />
         <Server className="mainnet:opacity-0 testnet:opacity-100 absolute right-0.5 top-0.5 h-4 w-4 text-testnet-secondary transition-opacity" />
       </div>
-      <Label
-        htmlFor="network-mode"
-        className="flex cursor-pointer items-center"
-      >
-        <span className="mainnet:block testnet:hidden text-mainnet-primary">
-          Mainnet
-        </span>
-        <span className="mainnet:hidden testnet:block text-testnet-primary">
-          Testnet
-        </span>
+      <Label htmlFor="network-mode" className="flex cursor-pointer items-center">
+        <span className="mainnet:block testnet:hidden text-mainnet-primary">Mainnet</span>
+        <span className="mainnet:hidden testnet:block text-testnet-primary">Testnet</span>
       </Label>
     </div>
   );

@@ -10,9 +10,7 @@ import { cn } from "@/lib/utils";
 const Sheet = SheetPrimitive.Root;
 
 //Add modal={false} makes the Sheet non-modal, meaning it won’t trap focus and won’t block interactions with the rest of the UI.
-const SheetModalFalse = (
-  props: React.ComponentProps<typeof SheetPrimitive.Root>,
-) => {
+const SheetModalFalse = (props: React.ComponentProps<typeof SheetPrimitive.Root>) => {
   return <SheetPrimitive.Root modal={false} {...props} />;
 };
 const SheetTrigger = SheetPrimitive.Trigger;
@@ -64,61 +62,41 @@ interface SheetContentProps
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,
   SheetContentProps
->(
-  (
-    { side = "right", className, children, showOverlay = true, ...props },
-    ref,
-  ) => {
-    // Remove showOverlay from props to avoid passing it to SheetPrimitive.Content
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { showOverlay: _, ...contentProps } = { showOverlay, ...props };
+>(({ side = "right", className, children, showOverlay = true, ...props }, ref) => {
+  // Remove showOverlay from props to avoid passing it to SheetPrimitive.Content
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { showOverlay: _, ...contentProps } = { showOverlay, ...props };
 
-    return (
-      <SheetPortal>
-        {showOverlay && (
-          <div className="fixed inset-0 z-[1001] bg-black/80 duration-200 animate-in fade-in-0" />
-        )}
-        <SheetPrimitive.Content
-          ref={ref}
-          className={cn(sheetVariants({ side }), className)}
-          {...contentProps}
+  return (
+    <SheetPortal>
+      {showOverlay && (
+        <div className="fixed inset-0 z-[1001] bg-black/80 duration-200 animate-in fade-in-0" />
+      )}
+      <SheetPrimitive.Content
+        ref={ref}
+        className={cn(sheetVariants({ side }), className)}
+        {...contentProps}
+      >
+        <SheetPrimitive.Close
+          autoFocus={false}
+          className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus-visible:outline-none disabled:pointer-events-none data-[state=open]:bg-secondary"
         >
-          <SheetPrimitive.Close
-            autoFocus={false}
-            className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus-visible:outline-none disabled:pointer-events-none data-[state=open]:bg-secondary"
-          >
-            <X className="h-5 w-5 text-neutral-light-500" />
-          </SheetPrimitive.Close>
-          {children}
-        </SheetPrimitive.Content>
-      </SheetPortal>
-    );
-  },
-);
+          <X className="h-5 w-5 text-neutral-light-500" />
+        </SheetPrimitive.Close>
+        {children}
+      </SheetPrimitive.Content>
+    </SheetPortal>
+  );
+});
 SheetContent.displayName = SheetPrimitive.Content.displayName;
-const SheetHeader = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn(
-      "flex flex-col space-y-2 text-center sm:text-left",
-      className,
-    )}
-    {...props}
-  />
+const SheetHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+  <div className={cn("flex flex-col space-y-2 text-center sm:text-left", className)} {...props} />
 );
 SheetHeader.displayName = "SheetHeader";
 
-const SheetFooter = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
+const SheetFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(
-      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
-      className,
-    )}
+    className={cn("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className)}
     {...props}
   />
 );

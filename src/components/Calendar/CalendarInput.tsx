@@ -61,15 +61,10 @@ export function CalendarInput<
                     "h-10 text-base": size === "medium",
                     "h-12 text-lg": size === "large",
                   })}
-                  inputClassName={cn(
-                    "disabled:text-neutral-light-300",
-                    inputClassName,
-                  )}
+                  inputClassName={cn("disabled:text-neutral-light-300", inputClassName)}
                   placeholder={placeholder}
                   readOnly
-                  value={
-                    field.value ? formatDateUTC(field.value, formatStr) : ""
-                  }
+                  value={field.value ? formatDateUTC(field.value, formatStr) : ""}
                   endAdornment={<CalendarIcon className="h-4 w-4" />}
                 />
               </FormControl>

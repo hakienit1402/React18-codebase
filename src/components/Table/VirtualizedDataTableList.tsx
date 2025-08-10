@@ -1,9 +1,5 @@
 import { flexRender, Row, Table } from "@tanstack/react-table";
-import {
-  useVirtualizer,
-  VirtualItem,
-  Virtualizer,
-} from "@tanstack/react-virtual";
+import { useVirtualizer, VirtualItem, Virtualizer } from "@tanstack/react-virtual";
 import React, { useImperativeHandle } from "react";
 
 import { cn } from "@/lib/utils";
@@ -62,10 +58,7 @@ function VirtualizedDataTableList<TData>({
             className={cn("bg-common-background", tableHeadClassName)}
           >
             {table.getHeaderGroups().map((headerGroup) => (
-              <tr
-                key={headerGroup.id}
-                style={{ display: "flex", width: "100%" }}
-              >
+              <tr key={headerGroup.id} style={{ display: "flex", width: "100%" }}>
                 {headerGroup.headers.map((header) => {
                   return (
                     <th
@@ -78,12 +71,7 @@ function VirtualizedDataTableList<TData>({
                         "text-nowrap bg-common-background px-4 py-3 text-left align-middle text-sm font-medium text-neutral-dark-600 shadow-bottom-table-row hover:bg-common-surfaceOverlay",
                       )}
                     >
-                      <div>
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
-                      </div>
+                      <div>{flexRender(header.column.columnDef.header, header.getContext())}</div>
                     </th>
                   );
                 })}
@@ -101,9 +89,7 @@ function VirtualizedDataTableList<TData>({
         </table>
       </div>
       {tableFooter && (
-        <div className="mt-3 flex w-full items-center justify-end gap-2">
-          {tableFooter}
-        </div>
+        <div className="mt-3 flex w-full items-center justify-end gap-2">{tableFooter}</div>
       )}
     </div>
   );
@@ -139,8 +125,7 @@ function TableBody<TData>({
     overscan: 10, //increase overscan for smoother scrolling
     isScrollingResetDelay: 150, //reduce delay for faster reset
     measureElement:
-      typeof window !== "undefined" &&
-      navigator.userAgent.indexOf("Firefox") === -1
+      typeof window !== "undefined" && navigator.userAgent.indexOf("Firefox") === -1
         ? (element) => element?.getBoundingClientRect().height
         : undefined,
     // Add performance optimizations
@@ -166,16 +151,9 @@ function TableBody<TData>({
     return (
       <tbody>
         {Array.from({ length: 10 }).map((_, idx) => (
-          <tr
-            key={idx}
-            className="flex w-full animate-pulse border-b border-neutral-dark-200"
-          >
+          <tr key={idx} className="flex w-full animate-pulse border-b border-neutral-dark-200">
             {table.getAllColumns().map((_, colIdx) => (
-              <td
-                key={colIdx}
-                className={cn("!px-4 !py-3")}
-                style={{ flex: 1 }}
-              >
+              <td key={colIdx} className={cn("!px-4 !py-3")} style={{ flex: 1 }}>
                 <div className="h-4 w-full rounded bg-neutral-dark-100" />
               </td>
             ))}
