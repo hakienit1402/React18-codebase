@@ -16,6 +16,7 @@ import NetworkGuard from "@/guards/NetworkGuard";
 import { queryClient } from "@/lib/react-query";
 import ErrorFallback from "@/pages/ErrorFallback";
 import LoadingFullPage from "@/pages/LoadingFullPage";
+import { FeatureFlagProvider } from "@/features/flags/FeatureFlagProvider";
 
 initObservability();
 
@@ -26,16 +27,18 @@ createRoot(document.getElementById("root")!).render(
       onReset={() => window.location.replace(ROUTES_PATH.ROOT)}
     >
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-          <NetworkGuard>
-            <Suspense fallback={<LoadingFullPage />}>
-              <Routes>
-                <Route path="/*" element={<App />} />
-              </Routes>
-              <Toaster />
-            </Suspense>
-          </NetworkGuard>
-        </BrowserRouter>
+        <FeatureFlagProvider>
+          <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+            <NetworkGuard>
+              <Suspense fallback={<LoadingFullPage />}>
+                <Routes>
+                  <Route path="/*" element={<App />} />
+                </Routes>
+                <Toaster />
+              </Suspense>
+            </NetworkGuard>
+          </BrowserRouter>
+        </FeatureFlagProvider>
       </QueryClientProvider>
     </ErrorBoundary>
   </StrictMode>,

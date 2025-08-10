@@ -19,15 +19,13 @@ export function FeatureFlagProvider({ children, flags }: ProviderProps) {
     }
     const buildEnv = (import.meta as any).env ?? {};
     for (const key of Object.keys(buildEnv)) {
-      if (key.startsWith("VITE_FF_")) envFlags[key.replace("VITE_", "")] =
-        String(buildEnv[key]).toLowerCase() === "true";
+      if (key.startsWith("VITE_FF_"))
+        envFlags[key.replace("VITE_", "")] = String(buildEnv[key]).toLowerCase() === "true";
     }
     return { ...envFlags, ...(flags ?? {}) };
   }, [flags]);
 
-  return (
-    <FeatureFlagContext.Provider value={merged}>{children}</FeatureFlagContext.Provider>
-  );
+  return <FeatureFlagContext.Provider value={merged}>{children}</FeatureFlagContext.Provider>;
 }
 
 export function useFlag(name: string, defaultValue = false): boolean {
@@ -40,5 +38,3 @@ export function FlagGate({ name, children }: { name: string; children: React.Rea
   if (!on) return null;
   return <>{children}</>;
 }
-
-
