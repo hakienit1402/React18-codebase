@@ -19,18 +19,64 @@ WORKDIR /usr/share/nginx/html
 # Copy built app
 COPY --from=builder /app/dist .
 
-# Clean default NGINX config
-RUN rm /etc/nginx/conf.d/default.conf
+# Replace default NGINX config with minimal SPA fallback and no-cache for env.js
+RUN rm -f /etc/nginx/conf.d/default.conf && \
+    cat > /etc/nginx/conf.d/app.conf <<'NGINX_CONF' && \
+map $sent_http_content_type $expires {
+  default off;
+  text/html 15m;
+  text/css 15m;
+  application/javascript 15m;
+  ~image/ 15m;
+}
 
-# Copy custom NGINX config
-COPY deploy/nginx/nginx.conf /etc/nginx/conf.d
+server {
+  listen 8080;
+  listen [::]:8080;
+  server_name localhost;
 
-# Use a custom entrypoint that generates env.js, then chains to default nginx entrypoint
-COPY deploy/entrypoint.sh /usr/local/bin/app-entrypoint.sh
+  root /usr/share/nginx/html;
+  index index.html index.htm;
 
-# Fix permissions
-RUN chmod +x /usr/local/bin/app-entrypoint.sh && \
+  etag on;
+  expires $expires;
+
+  location / {
+    try_files $uri $uri/ /index.html;
+  }
+
+  location = /env.js {
+    add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0" always;
+  }
+}
+NGINX_CONF
+
+# Create entrypoint that generates env.js from VITE_* envs then chain to nginx
+RUN cat > /usr/local/bin/app-entrypoint.sh <<'ENTRYPOINT_SH' && \
+    chmod +x /usr/local/bin/app-entrypoint.sh && \
     chown -R nginx:nginx /usr/share/nginx/html /etc/nginx
+#!/bin/sh
+set -e
+HTML_DIR="/usr/share/nginx/html"
+OUT_FILE="$HTML_DIR/env.js"
+echo "[entrypoint] Generating $OUT_FILE from VITE_* envs"
+TMP_FILE="$(mktemp)"
+{
+  echo "window._env_ = {"
+  FIRST=1
+  for KEY in $(printenv | awk -F= '/^(VITE_)/{print $1}' | sort -u); do
+    VAL=$(printenv "$KEY" | sed -e 's/\\\\/\\\\\\\\/g' -e 's/\"/\\\"/g')
+    if [ "$FIRST" -eq 0 ]; then
+      echo ","
+    fi
+    printf "  %s: \"%s\"" "$KEY" "$VAL"
+    FIRST=0
+  done
+  echo "\n};"
+} > "$TMP_FILE"
+mv "$TMP_FILE" "$OUT_FILE"
+exec /docker-entrypoint.sh "$@"
+ENTRYPOINT_SH
 
 
 # ✅ Drop privileges after setup
