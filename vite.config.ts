@@ -77,7 +77,7 @@ export default defineConfig({
     cssMinify: true,
     sourcemap: false,
     reportCompressedSize: true,
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 500,
     cssCodeSplit: true,
     modulePreload: {
       polyfill: true,

@@ -25,6 +25,7 @@
     "prune:types": "ts-prune -I 'src/**/*.stories.tsx|src/**/*.stories.mdx'",
     "ci:check": "npm run prettier && npm run lint && npm run types:check && npm run test:run && npm run depcheck && npm run prune:types",
     "analyze": "ANALYZE=1 vite build",
+    "size:report": "vite build && node -e \"const fs=require('fs');const p='dist/assets/js';let ok=true;if(!fs.existsSync(p)){process.exit(0)};fs.readdirSync(p).filter(f=>f.endsWith('.js')).forEach(f=>{const s=(fs.statSync(p+'/'+f).size/1024).toFixed(1);console.log(f,s+'kb'); if(parseFloat(s)>500){ok=false; console.error('Budget exceeded:',f,s+'kb')}}); if(!ok) process.exit(1);\"",
     "cypress:run": "vite preview --port 4173 & wait-on http://localhost:4173 && cypress run --browser chrome",
     "release": "standard-version",
     "br": "./create-branch.sh",
