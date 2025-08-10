@@ -11,6 +11,7 @@ stages:
   - test
   - build
   - e2e
+  - publish
 
 .node_setup: &node_setup
   image: node:22
@@ -47,6 +48,27 @@ build-app:
     expire_in: 1 week
     paths:
       - dist/
+
+docker-build:
+  stage: publish
+  image: docker:26
+  services:
+    - docker:26-dind
+  variables:
+    DOCKER_DRIVER: overlay2
+  needs: ["build-app"]
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+    - export IMAGE="$CI_REGISTRY_IMAGE"
+    - export TAG="${CI_COMMIT_SHORT_SHA}"
+    - docker build -t "$IMAGE:$TAG" -f Dockerfile .
+    - docker push "$IMAGE:$TAG"
+  artifacts:
+    reports:
+      dotenv: 
+        - image.env
 
 e2e-cypress:
   stage: e2e

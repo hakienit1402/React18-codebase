@@ -200,10 +200,8 @@ How runtime env injection works (clean flow):
 
 2. In the runtime image:
 
-   - `deploy/env.template.js` is copied to `/usr/share/nginx/html/env.template.js`.
-   - Entry script `deploy/90-inject-runtime-env.sh` runs on container start and renders `/usr/share/nginx/html/env.js` by substituting these variables: `VITE_APP_ENV`, `VITE_API_URL`, `VITE_WS_URL`.
-   - If `env.template.js` is missing, a safe default `env.js` is created.
-   - `index.html` includes `<script type="module" src="/env.js"></script>` before bootstrapping the app, so `window._env_` is always available at runtime.
+   - Custom entrypoint generates `/usr/share/nginx/html/env.js` from all `VITE_*` envs.
+   - `index.html` includes `<script src="/env.js"></script>` before bootstrapping the app, so `window._env_` is always available at runtime.
 
 3. At runtime in the app:
    - Axios base URL reads `window._env_.VITE_API_URL` (`src/services/apis/apiConfig.ts`).
@@ -218,6 +216,14 @@ docker run --rm -p 8080:8080 \
   -e VITE_WS_URL=wss://api.example.com/ws \
   pulsar-frontend:latest
 ```
+
+## Deployment (split repo)
+
+If Kubernetes manifests sống ở repo hạ tầng riêng:
+
+- Workflow `Build and Push Docker Image` (`.github/workflows/docker.yml`) build và push image lên GHCR với tags: branch, tag, sha.
+- GitLab có job `docker-build` push image lên GitLab Registry.
+- Repo infra chỉ cần consume image tag/digest này vào Helm/Kustomize. Có thể bật repository-dispatch để tự động cập nhật PR/values.
 
 ## Development Workflow
 
