@@ -1,8 +1,6 @@
+## React 18 + TypeScript + Vite Starter
 
-
-## Overview
-
-Modern React 18 + TypeScript + Vite starter. Includes DDD-ish structure, shadcn/Radix UI components, React Query, routing/guards, Storybook, tests, and Docker (NGINX) with runtime-configurable envs.
+Clean, production-minded starter with DDD-inspired structure, modern UI primitives, testing, Storybook, and a Docker image that injects runtime envs.
 
 ## Table of Contents
 
@@ -19,14 +17,17 @@ Modern React 18 + TypeScript + Vite starter. Includes DDD-ish structure, shadcn/
 11. [Project Configuration](#project-configuration)
 12. [Contributing](#contributing)
 
-## Architecture
+## Features
 
-- DDD-inspired folder structure with `domains/*` for domain logic and `components/*` for shared UI
-- Client-side routing with React Router
-- Data fetching and caching via React Query
-- Axios API client with interceptors (token attach, 401 refresh + single-flight retry)
-- Error boundaries and basic offline guard
-- Build optimized with Vite (gzip + brotli compression and image optimization)
+- DDD-inspired structure (`domains/*` for features, `components/*` for shared UI)
+- React Router 6, React Query 5, Zustand 5
+- Axios with interceptors (token header, single-flight 401 refresh)
+- shadcn/Radix UI components, Tailwind CSS
+- Storybook (docs + a11y) with extensive component stories
+- Testing: Vitest + Testing Library; Cypress ready
+- i18n: react-i18next + language detector
+- Feature flags: simple provider (`FF_*`/`VITE_FF_*`) with `<FlagGate />`
+- Docker + NGINX serving SPA with runtime `VITE_*` env injection
 
 ## Technology Stack
 
@@ -88,9 +89,9 @@ src/
 
 ## Runtime Configuration
 
-2 cách cấu hình:
+Two options:
 
-1) Local dev qua Vite `.env.local` (build-time):
+1. Local dev via `.env.local` (build-time):
 
 ```
 VITE_APP_ENV=local
@@ -98,15 +99,15 @@ VITE_API_URL=http://localhost:3001/api
 VITE_WS_URL=ws://localhost:3001/ws
 ```
 
-2) Docker runtime — set `-e VITE_*` khi `docker run`. Entrypoint sinh `/env.js` → `window._env_`.
+2. Docker runtime — set `-e VITE_*` on `docker run`. The entrypoint writes `/env.js` → `window._env_`.
 
 Available keys:
 
 - `VITE_APP_ENV`
-- `VITE_API_URL` (used by the Axios client)
-- `VITE_WS_URL` (used by the STOMP WebSocket client)
+- `VITE_API_URL` (Axios base URL)
+- `VITE_WS_URL` (WS URL)
 
-Nếu không dùng `.env.local`, có thể tạo nhanh `public/env.js`:
+If you don’t use `.env.local`, you can quickly create `public/env.js`:
 
 ```js
 window._env_ = {
@@ -131,16 +132,16 @@ git clone <repository-url>
 cd pulsar-frontend
 npm install
 
-# Generate .env.local (defaults) and start dev
-npm run scaffold:env
-npm run dev
-# App: http://localhost:5173, Storybook: http://localhost:6006
+# Generate defaults and start dev
+npm run scaffold:env && npm run dev
+# App: http://localhost:5173
+# Storybook: http://localhost:6006
 ```
 
-## Available Scripts
+## Scripts
 
-- `dev`: start Vite dev server (port 3000)
-- `preview`: preview built app (port 80)
+- `dev`: start Vite dev server (port 5173)
+- `preview`: preview built app (port 4173)
 - `build`: type-check + production build
 - `types:check`: type-check only
 - `lint` / `lint:fix`: run/fix ESLint
@@ -159,16 +160,7 @@ Docker Compose helper scripts also exist (`docker:*`) but require a `docker-comp
 - `npm run test:ui` opens the Vitest UI.
 - Storybook runs at `http://localhost:6006` via `npm run storybook`.
 
-### Storybook organization
-
-- Stories are grouped under categories for quick navigation (see `.storybook/preview.ts`):
-  - Form: form fields and integrated examples (RHF + Zod)
-  - Components:
-    - Inputs: `Input`, `Textarea`, `Checkbox`, `Switch`, `Slider`, `RadioGroup`, `Toggle`, `ToggleGroup`, `InputOTP`
-    - Data Display: `Avatar`, `Badge`, `Card`, `Separator`, `Skeleton`, `Progress`, `Label`
-    - Navigation: `Tabs`, `Breadcrumb`, `Menubar`, `NavigationMenu`, `Pagination`
-    - Overlays: `Tooltip`, `Popover`, `Dialog`, `Drawer`, `AlertDialog`, `HoverCard`, `Sheet`, `ContextMenu`
-    - Utility: `ScrollArea`, `Resizable`, `Command`, `Select`
+Stories are grouped by Form/Components (see `.storybook/preview.ts`).
 
 Most stories expose controls for essential props and include minimal interactive examples.
 
@@ -201,9 +193,9 @@ How runtime env injection works:
    - Custom entrypoint generates `/usr/share/nginx/html/env.js` from all `VITE_*` envs.
    - `index.html` includes `<script src="/env.js"></script>` before bootstrapping the app, so `window._env_` is always available at runtime.
 
-3. At runtime in the app:
-   - Axios base URL reads `window._env_.VITE_API_URL` (`src/services/apis/apiConfig.ts`).
-   - STOMP WebSocket client reads `window._env_.VITE_WS_URL` (`src/services/ws/WebSocketService.ts`).
+3. In the app:
+   - Axios reads `window._env_.VITE_API_URL` (`src/services/apis/apiConfig.ts`).
+   - WebSocket reads `window._env_.VITE_WS_URL` (`src/services/ws/WebSocketService.ts`).
 
 Set env variables at `docker run` time (example):
 
@@ -220,20 +212,10 @@ docker run --rm -p 8080:8080 \
 - Rename project: `npm run scaffold:rename -- --name my-new-app --title "My New App"`
 - Generate env: `npm run scaffold:env`
 
-## Development Workflow
+## Development
 
-- Trunk-based development
-
-Branch naming:
-
-- `feat/PD-{Ticket}_description`
-- `fix/PD-{Ticket}_description`
-- `chore/PD-{Ticket}_description`
-
-Commit messages:
-
-- Use `npm run commit` (Commitizen)
-- Or: `feat: [PD-123] concise description`
+- Trunk-based workflow
+- Conventional Commits (use `npm run commit`)
 
 ## Coding Convention
 
@@ -248,11 +230,4 @@ Commit messages:
 
 ## Contributing
 
-1. Create a feature branch using the naming rules above
-2. Follow coding standards and include tests where relevant
-3. Commit via `npm run commit` or conventional commits
-4. Push and open a Pull Request
-
-## Support
-
-Please contact the development team for questions and support.
+1) Create a feature branch  2) Add tests  3) Commit via `npm run commit`  4) Open a PR
