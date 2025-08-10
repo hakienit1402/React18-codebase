@@ -1,0 +1,5 @@
+# Ignore Cypress test files
+cypress/
+
+# Ignore scripts directory
+scripts/
