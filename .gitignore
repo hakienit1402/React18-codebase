@@ -85,3 +85,7 @@ env.js
 *.njsproj
 *.sln
 *.sw?
+
+
+# Storybook build output (keep ignored to avoid committing artifacts)
+storybook-static/

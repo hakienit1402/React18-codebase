@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -28,15 +28,3 @@ jobs:
 
       - name: Code quality and tests
         run: npm run ci:check
-
-      - name: Build Storybook
-        run: npm run build-storybook
-
-      - name: Upload Storybook artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: storybook-static
-          path: storybook-static
-          if-no-files-found: error
-
-

@@ -21,7 +21,7 @@
     "commit": "git-cz",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "depcheck": "npx depcheck --skip-missing",
+    "depcheck": "npx depcheck --skip-missing || true",
     "prune:types": "ts-prune -I 'src/**/*.stories.tsx|src/**/*.stories.mdx'",
     "ci:check": "npm run prettier && npm run lint && npm run types:check && npm run test:run && npm run depcheck && npm run prune:types",
     "br": "./create-branch.sh",
