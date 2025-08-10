@@ -111,13 +111,14 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 @layer utilities {
   .bg-sidebar {
-    background: url("../assets/sidebar-bg.png") no-repeat center center/cover;
+    /* Fallback color when asset not present */
+    background-color: #0f0d17;
   }
   .bg-auth {
     background: url("../assets/bg-no-stars.png") no-repeat center center/cover;
   }
   .bg-error-page {
-    background: url("../assets/bg-novector.png") no-repeat center center/cover;
+    background-color: #0f0d17;
   }
 }
 @layer components {
