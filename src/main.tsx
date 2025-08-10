@@ -10,15 +10,12 @@ import "./styles/index.css";
 
 import { Toaster } from "@/components/Toaster";
 import "./i18n";
-import { initObservability } from "@/observability";
 import { ROUTES_PATH } from "@/constants/router";
 import NetworkGuard from "@/guards/NetworkGuard";
 import { queryClient } from "@/lib/react-query";
 import ErrorFallback from "@/pages/ErrorFallback";
 import LoadingFullPage from "@/pages/LoadingFullPage";
 import { FeatureFlagProvider } from "@/features/flags/FeatureFlagProvider";
-
-initObservability();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
