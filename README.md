@@ -2,7 +2,7 @@
 
 ## Overview
 
-Pulsar is a modern React + TypeScript + Vite application, following Domain-Driven Design (DDD) principles. It ships with a rich UI component library, opinionated tooling, and a production-ready Docker + NGINX setup with runtime-configurable environment variables.
+Modern React 18 + TypeScript + Vite starter. Includes DDD-ish structure, shadcn/Radix UI components, React Query, routing/guards, Storybook, tests, and Docker (NGINX) with runtime-configurable envs.
 
 ## Table of Contents
 
@@ -88,9 +88,9 @@ src/
 
 ## Runtime Configuration
 
-This app supports 2 cách cấu hình:
+2 cách cấu hình:
 
-1) Local dev qua Vite `.env.*` (build-time) — dùng `.env.local`:
+1) Local dev qua Vite `.env.local` (build-time):
 
 ```
 VITE_APP_ENV=local
@@ -98,7 +98,7 @@ VITE_API_URL=http://localhost:3001/api
 VITE_WS_URL=ws://localhost:3001/ws
 ```
 
-2) Docker runtime (local Docker) — set biến `-e VITE_*` khi `docker run`. Entrypoint sẽ sinh `/env.js` cho `window._env_`.
+2) Docker runtime — set `-e VITE_*` khi `docker run`. Entrypoint sinh `/env.js` → `window._env_`.
 
 Available keys:
 
@@ -106,7 +106,7 @@ Available keys:
 - `VITE_API_URL` (used by the Axios client)
 - `VITE_WS_URL` (used by the STOMP WebSocket client)
 
-For local development, bạn có thể tạo nhanh `public/env.js` (nếu không dùng `.env.local`):
+Nếu không dùng `.env.local`, có thể tạo nhanh `public/env.js`:
 
 ```js
 window._env_ = {
@@ -124,29 +124,17 @@ Notes:
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js 18+
-- npm
-
-### Install & Run
+Prerequisites: Node.js 18+, npm
 
 ```bash
 git clone <repository-url>
 cd pulsar-frontend
 npm install
 
-# Create runtime env for dev (either copy template or create new)
-cp deploy/env.template.js public/env.js
-# or create public/env.js with content:
-# window._env_ = {
-#   VITE_APP_ENV: 'local',
-#   VITE_API_URL: 'http://localhost:8080/api',
-#   VITE_WS_URL: 'ws://localhost:8080/ws',
-# };
-
+# Generate .env.local (defaults) and start dev
+npm run scaffold:env
 npm run dev
-# → http://localhost:3000
+# App: http://localhost:5173, Storybook: http://localhost:6006
 ```
 
 ## Available Scripts
@@ -186,7 +174,7 @@ Most stories expose controls for essential props and include minimal interactive
 
 ## Docker
 
-The production image serves the built app via NGINX and injects runtime env on startup.
+Production image serves the built app via NGINX and injects runtime env on startup.
 
 Build and run directly:
 
@@ -204,7 +192,7 @@ docker run --rm -p 8080:8080 \
 # Open http://localhost:8080
 ```
 
-How runtime env injection works (clean flow):
+How runtime env injection works:
 
 1. Build stage produces static assets to `dist/` (no build-time env baked into JS).
 
@@ -227,13 +215,10 @@ docker run --rm -p 8080:8080 \
   pulsar-frontend:latest
 ```
 
-## Deployment (split repo)
+## Scaffolding
 
-If Kubernetes manifests sống ở repo hạ tầng riêng:
-
-- Workflow `Build and Push Docker Image` (`.github/workflows/docker.yml`) build và push image lên GHCR với tags: branch, tag, sha.
-- GitLab có job `docker-build` push image lên GitLab Registry.
-- Repo infra chỉ cần consume image tag/digest này vào Helm/Kustomize. Có thể bật repository-dispatch để tự động cập nhật PR/values.
+- Rename project: `npm run scaffold:rename -- --name my-new-app --title "My New App"`
+- Generate env: `npm run scaffold:env`
 
 ## Development Workflow
 
@@ -260,7 +245,6 @@ Commit messages:
 ## Project Configuration
 
 - ESLint + Prettier enforced
-- Bitbucket Pipelines for CI/CD (tests, quality checks, builds)
 
 ## Contributing
 
