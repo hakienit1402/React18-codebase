@@ -3,6 +3,8 @@ import "@testing-library/jest-dom";
 import * as matchers from "@testing-library/jest-dom/matchers";
 import { cleanup } from "@testing-library/react";
 import { afterEach, expect, vi } from "vitest";
+import { setupServer } from "msw/node";
+import { handlers } from "@/mocks/handlers";
 
 // Extend Vitest's expect with @testing-library/jest-dom matchers
 expect.extend(matchers);
@@ -40,6 +42,12 @@ Object.defineProperty(window, "matchMedia", {
 afterEach(() => {
   vi.clearAllMocks();
 });
+
+// MSW server for unit/integration tests
+const server = setupServer(...handlers);
+beforeAll(() => server.listen({ onUnhandledRequest: "warn" }));
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
 // Mock session store
 vi.mock("@/services/session/sessionStore", () => ({

@@ -9,6 +9,7 @@ import App from "./App";
 import "./styles/index.css";
 
 import { Toaster } from "@/components/Toaster";
+import "./i18n";
 import { ROUTES_PATH } from "@/constants/router";
 import NetworkGuard from "@/guards/NetworkGuard";
 import { queryClient } from "@/lib/react-query";

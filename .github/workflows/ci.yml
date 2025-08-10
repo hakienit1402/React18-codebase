@@ -28,3 +28,7 @@ jobs:
 
       - name: Code quality and tests
         run: npm run ci:check
+    - name: E2E (Cypress)
+      run: |
+        npx wait-on http://localhost:4173 || true
+        npm run cypress:run

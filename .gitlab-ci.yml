@@ -10,6 +10,7 @@ variables:
 stages:
   - test
   - build
+  - e2e
 
 .node_setup: &node_setup
   image: node:22
@@ -46,3 +47,14 @@ build-app:
     expire_in: 1 week
     paths:
       - dist/
+
+e2e-cypress:
+  stage: e2e
+  extends: [*node_setup]
+  needs: ["build-app"]
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
+  script:
+    - npx wait-on -v http-get://web:8080 || true
+    - npm run cypress:run

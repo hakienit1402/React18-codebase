@@ -1,6 +1,7 @@
 import reactSWC from "@vitejs/plugin-react-swc";
 import path from "path";
 import { defineConfig } from "vite";
+import { visualizer } from "rollup-plugin-visualizer";
 import viteCompression from "vite-plugin-compression";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
@@ -44,6 +45,7 @@ export default defineConfig({
         multipass: true,
       },
     }),
+    ...(process.env.ANALYZE ? [visualizer({ open: false, filename: "dist/stats.html" })] : []),
   ],
   server: {
     host: "0.0.0.0",

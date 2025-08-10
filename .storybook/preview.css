@@ -27,3 +27,8 @@ body {
 button {
   color: inherit;
 }
+
+/* Docs preview background tweak */
+.sbdocs.sbdocs-preview {
+  --docs-preview-bg: #0b0b10;
+}

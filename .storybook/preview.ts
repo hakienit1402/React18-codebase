@@ -1,6 +1,10 @@
 import type { Preview } from "@storybook/react";
 import "./preview.css";
 import "../src/styles/index.css";
+import { initialize, mswDecorator } from "msw-storybook-addon";
+import "../src/i18n";
+
+initialize({ onUnhandledRequest: "bypass" });
 
 const preview: Preview = {
   parameters: {
@@ -53,6 +57,7 @@ const preview: Preview = {
       },
     },
   },
+  decorators: [mswDecorator],
 };
 
 export default preview;
